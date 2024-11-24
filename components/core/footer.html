@@ -1,0 +1,30 @@
+<footer style="padding: 20px 0px 20px 10px; text-align: center; background-color: #9f8cff41;">
+    <div style="text-align: center; padding: 32px 0px 20px 0px;">
+        <h4>
+            <a href="/" class="footer-btn">Home</a>
+            <a href="/pages/profile/" class="footer-btn">Profile</a>
+            <a href="/pages/cv/" class="footer-btn">Vitae</a>
+            <a href="/pages/contact/" class="footer-btn">Contact</a>
+        </h4>
+    </div>
+    <div style="padding-bottom: 20px;">
+        <a class="footer-icon" href="https://scholar.google.com/citations?user=k8FJn9sAAAAJ&hl=en" target="_blank">
+            <i class="fa-brands fa-google-scholar" style="font-size: 32px;"></i>
+        </a>
+        <a class="footer-icon" href="https://orcid.org/0000-0002-1624-3723" target="_blank">
+            <i class="fa-brands fa-orcid" style="font-size: 32px;"></i>
+        </a>
+        <a class="footer-icon" href="https://www.facebook.com/ashonko" target="_blank">
+            <i class="fa-brands fa-facebook" style="font-size: 32px;"></i>
+        </a>
+        <a class="footer-icon" href="https://github.com/ashonko" target="_blank">
+            <i class="fa-brands fa-github" style="font-size: 32px;"></i>
+        </a>
+    </div>
+    &copy; <span id="currentYear"></span> Rajib Biswas
+    <script>
+        $(document).ready(function () {
+            $('#currentYear').text(new Date().getFullYear());
+        });
+    </script>
+</footer>

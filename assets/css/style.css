@@ -1,0 +1,521 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&display=swap");
+
+body {
+  font-family: "Space Grotesk", sans-serif;
+  background-color: #f9f8fc;
+}
+
+
+/* Changing bootstrap colors */
+.bg-primary {
+  background-color: #7c49bc !important;
+}
+
+.bg-secondary {
+  background-color: #d8c097 !important;
+}
+
+.bg-accent {
+  background-color: #9dc96e !important;
+}
+
+.text-primary {
+  color: #7c49bc !important;
+}
+
+.text-secondary {
+  color: #d8c097 !important;
+}
+
+.text-accent {
+  color: #9dc96e !important;
+}
+
+
+/* Other backgrounds */
+.bg-two {
+  background-color: #f2ede9;
+}
+
+
+/* Headings and paragraphs */
+.font600 {
+  font-weight: 600;
+}
+
+/* Type scale: 1.333 */
+h1 {
+  font-size: 3.555rem;
+  line-height: 1.333;
+}
+
+h2 {
+  font-size: 2.666rem;
+  line-height: 1.333;
+}
+
+h3 {
+  font-size: 2rem;
+  line-height: 1.333;
+}
+
+h4 {
+  font-size: 1.5rem;
+  line-height: 1.333;
+}
+
+h5 {
+  font-size: 1.125rem;
+  line-height: 1.333;
+}
+
+h6 {
+  font-size: 0.875rem;
+  line-height: 1.333;
+}
+
+.caption {
+  font-size: 0.875rem;
+  font-weight: 200;
+}
+
+/* Yellow background text */
+.yellowBg {
+  color: black;
+  background-color: #ffcc00d7;
+  display: inline;
+  box-decoration-break: clone;
+  padding: 5px 10px;
+}
+
+/* Shadow text */
+.shadowText {
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+  display: inline-block;
+  padding: 5px 10px;
+}
+
+
+/* Images */
+.hero-image {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+  padding: 100px 20px;
+  text-align: left;
+}
+
+/* Icons */
+.icon-big {
+  font-size: 3.555rem;
+}
+
+.icon-medium {
+  font-size: 2.4rem;
+}
+
+.icon-small {
+  font-size: 1.5rem;
+}
+
+.icon-top {
+  margin-top: -32px;
+  padding-left: 20px;
+}
+
+
+/* Align */
+.align-center {
+  text-align: center;
+}
+
+/* Padding */
+.pt20 {
+  padding-top: 20px;
+}
+
+.pt40 {
+  padding-top: 40px;
+}
+
+.pt80 {
+  padding-top: 80px;
+}
+
+.pb20 {
+  padding-bottom: 20px;
+}
+
+.pb10 {
+  padding-bottom: 10px;
+}
+
+/* Buttons */
+/* Big buttons */
+.big-btn {
+  box-shadow: 4px 4px 0px #141414;
+  border-radius: 16px;
+  border: 4px black solid;
+  padding: 10px;
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow 0.3s, background-color 0.3s;
+}
+
+.big-btn:hover {
+  box-shadow: 6px 6px 0px #141414;
+  /* Adjusting the box-shadow for the upward movement */
+  background-color: #ffdc68;
+}
+
+.mid-btn {
+  box-shadow: 2px 2px 0px #141414;
+  border-radius: 16px;
+  border: 2px black solid;
+  padding: 10px;
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow 0.3s, background-color 0.3s;
+}
+
+.mid-btn:hover {
+  box-shadow: 4px 4px 0px #141414;
+}
+
+.sm-btn {
+  box-shadow: 1px 1px 0px #141414;
+  border-radius: 8px;
+  border: 1px black solid;
+  padding: 8px;
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow 0.3s, background-color 0.3s;
+}
+
+.sm-btn:hover {
+  box-shadow: 2px 2px 0px #141414;
+}
+
+.footer-btn {
+  padding: 16px 16px 8px 16px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.footer-btn:hover {
+  box-shadow: 0px 4px 0px #141414;
+}
+
+.footer-icon {
+  padding: 10px;
+  text-decoration: none;
+  color: #3f3b4c;
+}
+
+.footer-icon:hover {
+  color: #0062ff;
+}
+
+
+/* Timeline */
+.timeline {
+  width: 85%;
+  max-width: 700px;
+  /* margin-left: auto; */
+  margin-left: 30px;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 32px 0 32px 32px;
+  border-left: 2px solid #e3e3e3;
+  /* font-size: 1.125rem; */
+}
+
+.timeline-item {
+  display: flex;
+  gap: 24px;
+}
+
+.timeline-item-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-left: -52px;
+  flex-shrink: 0;
+  overflow: hidden;
+  box-shadow: 0 0 0 6px #fff;
+}
+
+.round-circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 9999px;
+}
+
+/* Left dash */
+.dash::before {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 10px;
+  margin-right: 8px;
+}
+
+.dashGap {
+  padding-left: 32px;
+}
+
+
+/* Colors */
+.color0 {
+  background-color: #F8766D;
+}
+
+.color1 {
+  background-color: #F8766D;
+}
+
+.color2 {
+  background-color: #DF8C01;
+}
+
+.color3 {
+  background-color: #CB9400;
+}
+
+.color4 {
+  background-color: #B39B02;
+}
+
+.color5 {
+  background-color: #9DA702;
+}
+
+.color6 {
+  background-color: #7CAE00;
+}
+
+.color7 {
+  background-color: #46B200;
+}
+
+.color8 {
+  background-color: #02B939;
+}
+
+.color9 {
+  background-color: #00BC67;
+}
+
+.color10 {
+  background-color: #03BF8C;
+}
+
+.color11 {
+  background-color: #03C1A9;
+}
+
+.color12 {
+  background-color: #03BFC4;
+}
+
+.color13 {
+  background-color: #02BBDC;
+}
+
+.color14 {
+  background-color: #00B4F0;
+}
+
+.color15 {
+  background-color: #01A9FF;
+}
+
+.color16 {
+  background-color: #609DFF;
+}
+
+.color17 {
+  background-color: #9F8CFF;
+}
+
+.color18 {
+  background-color: #C77CFF;
+}
+
+.color19 {
+  background-color: #E36DF6;
+}
+
+.color20 {
+  background-color: #F564E3;
+}
+
+.color21 {
+  background-color: #FF61CC;
+}
+
+.color22 {
+  background-color: #FF64B0;
+}
+
+.color23 {
+  background-color: #FF6C91;
+}
+
+/* Custom style for underline and links */
+u {
+  text-decoration: underline;
+  text-decoration-thickness: 4px;
+  text-underline-offset: 6px;
+  text-decoration-color: #FFCC02;
+}
+
+.linkDec {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  text-decoration-color: #FFCC02;
+  color: inherit;
+}
+
+.linkDecBlack {
+  text-decoration: none;
+  color: inherit;
+}
+
+.linkDecBlue {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  text-decoration-color: #609DFF;
+  color: inherit;
+}
+
+.linkDecExt {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  text-decoration-color: #FFCC02;
+  color: inherit;
+  position: relative;
+}
+
+.linkDecExt::after {
+  content: '\f35d';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 600;
+  margin-left: 2px;
+  font-size: 0.6em;
+  vertical-align: super;
+}
+
+.linkDecBlueExt {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  text-decoration-color: #609DFF;
+  color: inherit;
+}
+
+.linkDecBlueExt::after {
+  content: '\f35d';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 600;
+  margin-left: 2px;
+  font-size: 0.6em;
+  vertical-align: super;
+}
+
+
+.linkDecInt {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  text-decoration-color: #FFCC02;
+  color: inherit;
+  position: relative;
+}
+
+.linkDecInt::after {
+  content: '\f0a9';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 600;
+  margin-left: 4px;
+  font-size: 1.0em;
+}
+
+
+/* Quotes */
+.quote {
+  margin: 10px 40px;
+  padding: 10px;
+  border: 1px solid #f8766d85;
+  border-radius: 10px;
+  background-color: rgba(255, 204, 2, 0.329);
+  font-style: italic;
+  text-align: center;
+  position: relative;
+}
+
+.quote::before {
+  content: '"';
+  position: absolute;
+  top: -6px;
+  left: -10px;
+  font-size: 22pt;
+  font-weight: bold;
+}
+
+.quote::after {
+  content: '"';
+  position: absolute;
+  bottom: -12px;
+  right: -4px;
+  font-size: 22pt;
+  font-weight: bold;
+}
+
+
+/* Contents button */
+#contents-button {
+  display: inline-block;
+  background-color: #ff9800;
+  padding: 0px 20px 0px 20px;
+  text-decoration: none;
+  text-align: center;
+  border-radius: 4px;
+  position: fixed;
+  top: 20px;
+  right: 30px;
+  transition: background-color 0.3s, opacity 0.5s, visibility 0.5s;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1000;
+  margin: 30px;
+}
+
+#contents-button::after {
+  content: "Contents";
+  font-weight: bold;
+  line-height: 50px;
+  color: #fff;
+}
+
+#contents-button:hover {
+  cursor: pointer;
+  background-color: #333;
+}
+
+#contents-button:active {
+  background-color: #555;
+}
+
+#contents-button.show {
+  opacity: 1;
+  visibility: visible;
+}
