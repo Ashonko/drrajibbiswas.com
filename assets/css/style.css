@@ -519,3 +519,27 @@ u {
   opacity: 1;
   visibility: visible;
 }
+
+
+/* Gallery */
+#art-gallery {
+  margin-top: 30px;
+}
+
+#art-gallery a {
+  display: block;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+#art-gallery a:hover {
+  opacity: 0.9;
+}
+
+#art-gallery img {
+  object-fit: cover;
+  height: 200px;
+  width: 100%;
+  border-radius: 8px;
+}
