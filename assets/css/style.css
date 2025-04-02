@@ -217,6 +217,14 @@ h6 {
   color: #0062ff;
 }
 
+/* Badge */
+.year-badge {
+  padding: 4px;
+  font-size: 12px;
+  border-radius: 4px;
+  color: white;
+  background-color: #9F8CFF;
+}
 
 /* Timeline */
 .timeline {
@@ -478,6 +486,12 @@ u {
   right: -4px;
   font-size: 22pt;
   font-weight: bold;
+}
+
+.long-quote {
+  margin-right: 24px; 
+  border-left: 2px solid #7CAE00;
+  padding-left: 10px;
 }
 
 
