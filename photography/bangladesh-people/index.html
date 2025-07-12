@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Include Common Dependencies -->
+    <script>
+        fetch('../components/core/dependencies.html')
+            .then(response => response.text())
+            .then(html => {
+                document.head.insertAdjacentHTML('beforeend', html);
+            });
+    </script>
+
+    <title>Bangladesh People Photography - Dr Rajib Biswas</title>
+
+    <!-- Meta -->
+    <meta name="title" content="People of Bangladesh Photography - Dr Rajib Biswas">
+    <meta name="description" content="Experience the vibrant culture and daily life of Bangladesh through Dr Rajib Biswas's lens - capturing authentic moments, traditions, and the warmth of its people">
+    <meta name="keywords" content="Bangladesh People Photography, Bangladesh Culture Photography, Bangladesh Street Photography, Bangladesh Portraits, Bangladesh Life, Bangladesh Traditions, Cultural Photography">
+    <meta name="robots" content="index, follow">
+</head>
+
+<body class="photography-body">
+    <!-- Include Navigation Component -->
+    <div id="navigation-container"></div>
+
+    <!-- Cover Photo -->
+    <div class="cover-photo" style="background-image: url('/assets/img/cocurricular/photography/10-1-2018_rajib_biswas_3.jpg');">
+        <div class="cover-content">
+            <h1 class="cover-title">People of Bangladesh</h1>
+            <p class="cover-subtitle">Celebrate the vibrant culture and warmth</p>
+            <p class="cover-count">Stories of life and human connection</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="photography-main">
+        <div class="container-fluid">
+            <!-- Photo Gallery -->
+            <div class="photo-gallery" id="photoGallery">
+                <!-- Photos will be loaded dynamically -->
+            </div>
+
+            <!-- Loading indicator -->
+            <div class="loading-indicator" id="loadingIndicator">
+                <div class="spinner"></div>
+                <p>Loading more photos...</p>
+            </div>
+
+            <!-- No results message -->
+            <div class="no-results" id="noResults" style="display: none;">
+                <i class="fas fa-search"></i>
+                <h3>No photos found</h3>
+                <p>Please, try a different query instead</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Include Footer Component -->
+    <div id="footer-container"></div>
+
+    <!-- Include Modal Component -->
+    <div id="modal-container"></div>
+
+    <!-- Scripts -->
+    <script src="../scripts/data-service.js"></script>
+    <script src="../scripts/category-gallery.js"></script>
+    <script>
+        // Load components and initialize gallery
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load navigation
+            fetch('../components/core/navigation.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('navigation-container').innerHTML = html;
+                    
+                    // Add category-specific navigation
+                    const navCenter = document.getElementById('nav-center');
+                    if (navCenter) {
+                        navCenter.innerHTML = `
+                            <div class="nav-links">
+                                <a href="/photography/" class="nav-link">All Photos</a>
+                                <a href="/photography/bangladesh-people/" class="nav-link active">Bangladesh - People</a>
+                            </div>
+                        `;
+                    }
+                    
+                    // Update search placeholder
+                    const searchInput = document.getElementById('searchInput');
+                    if (searchInput) {
+                        searchInput.placeholder = 'Search photos...';
+                    }
+                });
+
+            // Load footer
+            fetch('../components/core/footer.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('footer-container').innerHTML = html;
+                });
+
+            // Load modal
+            fetch('../components/core/modal.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('modal-container').innerHTML = html;
+                    
+                    // Initialize the category gallery after modal is loaded
+                    const gallery = new CategoryGallery('bangladesh-people');
+                    gallery.init();
+                });
+        });
+    </script>
+</body>
+
+</html>

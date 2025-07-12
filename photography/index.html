@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Include Common Dependencies -->
+    <script>
+        fetch('./components/core/dependencies-main.html')
+            .then(response => response.text())
+            .then(html => {
+                document.head.insertAdjacentHTML('beforeend', html);
+            });
+    </script>
+
+    <title>Photography Gallery - Dr Rajib Biswas</title>
+
+    <!-- Meta -->
+    <meta name="title" content="Photography Portfolio - Dr Rajib Biswas">
+    <meta name="description" content="Explore Dr Rajib Biswas's diverse photography portfolio featuring celestial wonders, natural landscapes, cultural moments, and wildlife from Bangladesh, Nepal, and beyond">
+    <meta name="keywords" content="Photography Portfolio, Nature Photography, Wildlife Photography, Celestial Photography, Bangladesh Photography, Nepal Photography, Landscape Photography, Cultural Photography, Animal Photography">
+    <meta name="robots" content="index, follow">
+</head>
+
+<body class="photography-body">
+    <!-- Include Navigation Component -->
+    <div id="navigation-container"></div>
+
+    <!-- Hero Banner -->
+    <section class="hero-banner">
+        <div class="hero-image">
+            <img src="/assets/img/cocurricular/photography/23-3-2016_rajib_biswas.jpg" alt="Photography by Dr. Rajib Biswas" loading="lazy">
+        </div>
+        <div class="hero-content">
+            <h1 style="font-weight: 600;">Experience the world through my lens</h1>
+            <p class="hero-subtitle">Explore from the celestial wonders above to the natural beauty of home and beyond</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="photography-main" style="padding-top: 40px;">
+        <div class="container-fluid">
+            <!-- Category Sections (default view) -->
+            <div id="categoryView">
+                <!-- Initial loading indicator -->
+                <div class="initial-loading" id="initialLoading" style="text-align: center; padding: 60px 20px;">
+                    <div class="spinner" style="margin: 0 auto 20px; width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid #007bff; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+                    <p style="color: #666;">Loading photo gallery...</p>
+                </div>
+                <!-- Categories will be loaded dynamically -->
+            </div>
+
+            <!-- Photo Gallery (search/filter view) -->
+            <div class="photo-gallery" id="photoGallery" style="display: none;">
+                <!-- Photos will be loaded dynamically -->
+            </div>
+
+            <!-- Loading indicator -->
+            <div class="loading-indicator" id="loadingIndicator">
+                <div class="spinner"></div>
+                <p>Loading more photos...</p>
+            </div>
+
+            <!-- No results message -->
+            <div class="no-results" id="noResults" style="display: none;">
+                <i class="fas fa-search"></i>
+                <h3>No photos found</h3>
+                <p>Try adjusting your search or filter criteria</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Include Footer Component -->
+    <div id="footer-container"></div>
+
+    <!-- Include Modal Component -->
+    <div id="modal-container"></div>
+
+    <!-- Scripts -->
+    <script src="./scripts/data-service.js"></script>
+    <script src="./scripts/photography.js"></script>
+    <script>
+        // Load components
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load navigation
+            fetch('./components/core/navigation.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('navigation-container').innerHTML = html;
+                });
+
+            // Load footer
+            fetch('./components/core/footer.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('footer-container').innerHTML = html;
+                });
+
+            // Load modal
+            fetch('./components/core/modal.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('modal-container').innerHTML = html;
+                    
+                    // Add a small delay to ensure all components are fully loaded
+                    setTimeout(() => {
+                        // Initialize the photography gallery after modal is loaded
+                        const gallery = new PhotographyGallery();
+                        gallery.init();
+                    }, 100);
+                });
+        });
+    </script>
+</body>
+
+</html> 

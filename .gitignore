@@ -42,3 +42,9 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+.DS_Store
+.DS_Store
+.DS_Store
+assets/.DS_Store
+assets/img/.DS_Store
+assets/img/cocurricular/.DS_Store

@@ -1,0 +1,34 @@
+<!-- Photo Modal -->
+<div class="photo-modal" id="photoModal">
+    <div class="modal-overlay"></div>
+    <div class="modal-content">
+        <button class="modal-close" id="modalClose">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="modal-navigation">
+            <button class="modal-nav modal-prev" id="modalPrev">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="modal-nav modal-next" id="modalNext">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+        <div class="modal-image-container">
+            <div class="modal-image-wrapper">
+                <div class="modal-loading" id="modalLoading">
+                    <div class="spinner"></div>
+                    <p>Loading image...</p>
+                </div>
+                <img src="" alt="" id="modalImage" class="modal-image">
+            </div>
+            <div class="modal-info">
+                <h3 id="modalTitle"></h3>
+                <p id="modalDescription"></p>
+                <div class="modal-meta">
+                    <span id="modalLocation"></span>
+                    <span id="modalDate" class="modal-date"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

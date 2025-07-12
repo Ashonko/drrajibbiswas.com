@@ -1,0 +1,128 @@
+[
+    {
+        "id": 1,
+        "src": "/assets/img/cocurricular/photography/2-3-2018_rajib_biswas.jpg",
+        "thumb": "/assets/img/cocurricular/photography/2-3-2018_rajib_biswas_thumb.jpg",
+        "title": "Twilight Over Kathmandu",
+        "description": "A mesmerizing view of the Kathmandu skyline as the evening sky paints a canvas of vibrant colors, capturing the serene transition from day to night.",
+        "locationName": "Kathmandu, Nepal",
+        "locationLink": "https://maps.app.goo.gl/Wrvqr8LwU8BuMqfJ7",
+        "date": "2018-02-03",
+        "category": "nepal",
+        "tags": ["sky", "night", "kathmandu", "nepal", "twilight"]
+    },
+    {
+        "id": 2,
+        "src": "/assets/img/cocurricular/photography/5-3-2018_rajib_biswas.jpg",
+        "thumb": "/assets/img/cocurricular/photography/5-3-2018_rajib_biswas_thumb.jpg",
+        "title": "Tranquil Waters of Phewa Lake",
+        "description": "A serene morning at Phewa Lake in Pokhara, Nepal, where colorful boats rest gently on the calm waters, framed by the majestic Annapurna range in the distance.",
+        "locationName": "Pokhara, Nepal",
+        "locationLink": "https://www.google.com/maps?q=loc:28.20893468564376,83.95559572650545",
+        "date": "2018-05-03",
+        "category": "nepal",
+        "tags": ["lake", "nepal", "pokhara", "annapurna", "tranquility"]
+    },
+    {
+        "id": 3,
+        "src": "/assets/img/cocurricular/photography/8-1-2018_rajib_biswas.jpg",
+        "thumb": "/assets/img/cocurricular/photography/8-1-2018_rajib_biswas_thumb.jpg",
+        "title": "Celestial Night at Saint Martin's Island",
+        "description": "On a clear night at Saint Martin's Island, I snapped this photo to capture the serene beauty of the starry sky. The lush greenery along the island's edge contrasts beautifully with the vast cosmos above. Saint Martin's is a small, picturesque island in the Bay of Bengal, just off the coast of Bangladesh. It's the only coral island here, known for its unique marine life, pristine beaches, and crystal-clear waters.",
+        "locationName": "Saint Martin's Island, Bangladesh",
+        "locationLink": "https://www.google.com/maps?q=loc:20.629556,92.326715",
+        "date": "2018-08-01",
+        "category": "celestial-bodies",
+        "tags": ["celestial", "saint-martin", "bangladesh"]
+    },
+    {
+        "id": 4,
+        "src": "/assets/img/cocurricular/photography/8-8-2017_rajib_biswas_partial_eclipse.jpg",
+        "thumb": "/assets/img/cocurricular/photography/8-8-2017_rajib_biswas_partial_eclipse_thumb.jpg",
+        "title": "Journey Through the Eclipse",
+        "description": "I captured this series of photos during a lunar eclipse, watching as the moon slowly slipped into Earth's shadow. It was an incredible experience to witness the moon's transformation, and I loved being able to document each phase of this celestial dance.",
+        "date": "2018-10-01",
+        "category": "celestial-bodies",
+        "tags": ["eclipse", "lunar-eclipse", "Bangladesh"]
+    },
+    {
+        "id": 5,
+        "src": "/assets/img/cocurricular/photography/10-1-2018_rajib_biswas_2.jpg",
+        "thumb": "/assets/img/cocurricular/photography/10-1-2018_rajib_biswas_2_thumb.jpg",
+        "title": "Flight Over the Waves",
+        "description": "On my journey to Saint Martin's Island, I captured this scene of seagulls soaring above the waves. The vibrant energy of the birds against the backdrop of the open sea was beautiful. The ship's wake added a dynamic element to the scene, making the moment even more exhilarating.",
+        "locationName": "Bay of Bengal",
+        "locationLink": "https://www.google.com/maps?q=loc:20.733323,92.341669",
+        "date": "2018-10-01",
+        "category": "bangladesh-nature",
+        "tags": ["seagulls", "waves", "bangladesh"]
+    },
+    {
+        "id": 6,
+        "src": "/assets/img/cocurricular/photography/10-1-2018_rajib_biswas_3.jpg",
+        "thumb": "/assets/img/cocurricular/photography/10-1-2018_rajib_biswas_3_thumb.jpg",
+        "title": "Sunset Silhouettes",
+        "description": "I captured this moment of my friends enjoying the sunset, their silhouettes against the golden sky. The warm glow of the setting sun created a magical atmosphere.",
+        "locationName": "Teknaf, Bangladesh",
+        "locationLink": "https://www.google.com/maps?q=loc:20.904889567801746,92.27881709722193",
+        "date": "2018-10-01",
+        "category": "bangladesh-people",
+        "tags": ["sunset", "silhouettes", "bangladesh", "teknaf"]
+    },
+    {
+        "id": 7,
+        "src": "/assets/img/cocurricular/photography/10-1-2018_rajib_biswas_4.jpg",
+        "thumb": "/assets/img/cocurricular/photography/10-1-2018_rajib_biswas_4_thumb.jpg",
+        "title": "Solitude on the Bay",
+        "description": "I captured this photo of a lone boat gently navigating the vast expanse of the Bay of Bengal. The vibrant turquoise waters stretch endlessly, meeting the clear blue sky at the horizon. The Bay of Bengal, with its vast and serene waters, is a marvel of nature. Known for its rich biodiversity, the bay supports a wide array of marine life and vibrant ecosystems.",
+        "locationName": "Bay of Bengal",
+        "locationLink": "https://www.google.com/maps?q=loc:20.724099,92.343587",
+        "date": "2018-10-01",
+        "category": "bangladesh-nature",
+        "tags": ["bay", "bangladesh", "solitude"]
+    },
+    {
+        "id": 8,
+        "src": "/assets/img/cocurricular/photography/10-1-2018_rajib_biswas.jpg",
+        "thumb": "/assets/img/cocurricular/photography/10-1-2018_rajib_biswas_thumb.jpg",
+        "title": "Sunrise Over Teknaf",
+        "description": "I captured this stunning sunrise in Teknaf, Bangladesh. There's something truly magical about watching the sun rise over the horizon, casting its golden glow across the landscape.",
+        "date": "2018-10-01",
+        "category": "bangladesh-nature",
+        "tags": ["sunrise", "teknaf", "bangladesh"]
+    },
+    {
+        "id": 9,
+        "src": "/assets/img/cocurricular/photography/23-3-2016_rajib_biswas.jpg",
+        "thumb": "/assets/img/cocurricular/photography/23-3-2016_rajib_biswas_thumb.jpg",
+        "title": "Bandarban, Bangladesh",
+        "description": "I captured this photo of the hills in Bandarban, from a hill surrounding the Boga Lake.",
+        "locationName": "Remakri Pransa, Ruma, Bandarban, Bangladesh",
+        "locationLink": "https://www.google.com/maps?q=loc:21.981886,92.468659",
+        "date": "2016-03-23",
+        "category": "bangladesh-nature",
+        "tags": ["sunrise", "teknaf", "bangladesh"]
+    },
+    {
+        "id": 10,
+        "src": "/assets/img/cocurricular/photography/25-8-2012_The Moon - Rajib Biswas.jpg",
+        "thumb": "/assets/img/cocurricular/photography/25-8-2012_The Moon - Rajib Biswas_thumb.jpg",
+        "title": "The Moon",
+        "description": "I captured this photo of the moon in the sky, long before mobiles with ultra zoom came into existence.",
+        "date": "2012-08-25",
+        "locationName": "The Moon",
+        "locationLink": "https://www.google.com/maps/space/moon/@20.761864,21.5893386,12288452m/data=!3m1!1e3?entry=ttu&g_ep=EgoyMDI1MDYxNy4wIKXMDSoASAFQAw%3D%3D",
+        "category": "celestial-bodies",
+        "tags": ["moon", "celestial", "bangladesh"]
+    },
+    {
+        "id": 11,
+        "src": "/assets/img/cocurricular/photography/2021 February 20.jpg",
+        "thumb": "/assets/img/cocurricular/photography/2021 February 20 - Thumb.jpg",
+        "title": "The Neighbour Squirrel",
+        "description": "Meet our neighbour squirrel, who comes to visit us often, jumping from tree to tree.",
+        "date": "2021-02-20",
+        "category": "neighbours-around-us",
+        "tags": ["squirrel", "neighbours", "animal"]
+    }
+] 

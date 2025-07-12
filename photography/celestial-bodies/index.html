@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Include Common Dependencies -->
+    <script>
+        fetch('../components/core/dependencies.html')
+            .then(response => response.text())
+            .then(html => {
+                document.head.insertAdjacentHTML('beforeend', html);
+            });
+    </script>
+
+    <title>Celestial Bodies Photography - Dr Rajib Biswas</title>
+
+    <!-- Meta -->
+    <meta name="title" content="Celestial Photography - Dr Rajib Biswas">
+    <meta name="description" content="Journey through the cosmos with Dr Rajib Biswas's astrophotography collection - featuring lunar eclipses, starlit skies, and celestial phenomena captured with precision and artistry">
+    <meta name="keywords" content="Celestial Photography, Astrophotography, Moon Photography, Eclipse Photography, Night Sky Photography, Astronomical Photography, Star Photography, Lunar Photography">
+    <meta name="robots" content="index, follow">
+</head>
+
+<body class="photography-body">
+    <!-- Include Navigation Component -->
+    <div id="navigation-container"></div>
+
+    <!-- Cover Photo -->
+    <div class="cover-photo" style="background-image: url('/assets/img/cocurricular/photography/8-1-2018_rajib_biswas.jpg');">
+        <div class="cover-content">
+            <h1 class="cover-title">Celestial Bodies</h1>
+            <p class="cover-subtitle">Marvel at the awe-inspiring wonders of the night sky</p>
+            <p class="cover-count">From lunar phases to starlit horizons</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="photography-main">
+        <div class="container-fluid">
+            <!-- Photo Gallery -->
+            <div class="photo-gallery" id="photoGallery">
+                <!-- Photos will be loaded dynamically -->
+            </div>
+
+            <!-- Loading indicator -->
+            <div class="loading-indicator" id="loadingIndicator">
+                <div class="spinner"></div>
+                <p>Loading more photos...</p>
+            </div>
+
+            <!-- No results message -->
+            <div class="no-results" id="noResults" style="display: none;">
+                <i class="fas fa-search"></i>
+                <h3>No photos found</h3>
+                <p>Please, try a different query instead</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Include Footer Component -->
+    <div id="footer-container"></div>
+
+    <!-- Include Modal Component -->
+    <div id="modal-container"></div>
+
+    <!-- Scripts -->
+    <script src="../scripts/data-service.js"></script>
+    <script src="../scripts/category-gallery.js"></script>
+    <script>
+        // Load components and initialize gallery
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load navigation
+            fetch('../components/core/navigation.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('navigation-container').innerHTML = html;
+                    
+                    // Add category-specific navigation
+                    const navCenter = document.getElementById('nav-center');
+                    if (navCenter) {
+                        navCenter.innerHTML = `
+                            <div class="nav-links">
+                                <a href="/photography/" class="nav-link">All Photos</a>
+                                <a href="/photography/celestial-bodies/" class="nav-link active">Celestial Bodies</a>
+                            </div>
+                        `;
+                    }
+                    
+                    // Update search placeholder
+                    const searchInput = document.getElementById('searchInput');
+                    if (searchInput) {
+                        searchInput.placeholder = 'Search photos...';
+                    }
+                });
+
+            // Load footer
+            fetch('../components/core/footer.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('footer-container').innerHTML = html;
+                });
+
+            // Load modal
+            fetch('../components/core/modal.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('modal-container').innerHTML = html;
+                    
+                    // Initialize the category gallery after modal is loaded
+                    const gallery = new CategoryGallery('celestial-bodies');
+                    gallery.init();
+                });
+        });
+    </script>
+</body>
+
+</html>
