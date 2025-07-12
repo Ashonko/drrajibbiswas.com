@@ -1,6 +1,168 @@
 <!-- Footer -->
-<footer class="photography-footer">
+<footer class="footer">
     <div class="footer-content">
-        <p class="footer-bottom">© 2025 Dr Rajib Biswas. All rights reserved.</p>
+        <div class="footer-brand">
+            <a href="/" class="footer-logo-link">
+                <img src="/assets/img/web/rajibbiswas-icon.png" alt="Dr Rajib Biswas" class="footer-logo">
+                <span class="footer-brand-name">Dr Rajib Biswas</span>
+            </a>
+        </div>
+        <nav class="footer-nav">
+            <div class="footer-nav-group">
+                <h4><i class="fas fa-compass"></i> Navigation</h4>
+                <a href="/" class="footer-link">- Home</a>
+                <a href="/pages/profile/" class="footer-link">- Profile</a>
+                <a href="/pages/contact/" class="footer-link">- Contact</a>
+            </div>
+            <div class="footer-nav-group">
+                <h4><i class="fas fa-briefcase"></i> Portfolio</h4>
+                <a href="/pages/education/" class="footer-link">- Education</a>
+                <a href="/pages/work-experience/" class="footer-link">- Work Experience</a>
+                <a href="/pages/publications/" class="footer-link">- Research & Publications</a>
+                <a href="/pages/cv/" class="footer-link">- Curriculum Vitae</a>
+            </div>
+            <div class="footer-nav-group">
+                <h4><i class="fas fa-camera-retro"></i> Photography</h4>
+                <a href="/photography/" class="footer-link">- Home</a>
+                <a href="/photography/bangladesh-people/" class="footer-link">- Nature of Bangladesh</a>
+                <a href="/photography/celestial-bodies/" class="footer-link">- Celestial Bodies</a>
+                <a href="/photography/neighbours-around-us/" class="footer-link">- Wildlife & Animals</a>
+            </div>
+        </nav>
     </div>
-</footer> 
+    <div class="footer-bottom">
+        <p class="copyright">&copy; 2024 Dr Rajib Biswas. All rights reserved.</p>
+    </div>
+</footer>
+
+<style>
+.footer {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    padding: 40px 0 20px;
+    margin-top: 60px;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.footer-brand {
+    flex: 1;
+    min-width: 200px;
+}
+
+.footer-logo-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.footer-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.footer-brand-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.footer-nav {
+    flex: 2;
+    display: flex;
+    justify-content: flex-start;
+    gap: 60px;
+    flex-wrap: wrap;
+}
+
+.footer-nav-group {
+    min-width: 200px;
+    text-align: left;
+}
+
+.footer-nav-group h4 {
+    color: #ffffff;
+    font-size: 1rem;
+    margin-bottom: 16px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.footer-nav-group h4 i {
+    color: #007bff;
+}
+
+.footer-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #cccccc;
+    text-decoration: none;
+    margin-bottom: 12px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.footer-link i {
+    width: 16px;
+    color: #999999;
+    transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+    color: #ffffff;
+}
+
+.footer-link:hover i {
+    color: #007bff;
+}
+
+.footer-bottom {
+    max-width: 1200px;
+    margin: 40px auto 0;
+    padding: 20px 20px 0;
+    border-top: 1px solid #333333;
+    text-align: center;
+}
+
+.copyright {
+    color: #999999;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .footer-brand {
+        text-align: center;
+    }
+
+    .footer-logo-link {
+        justify-content: center;
+    }
+
+    .footer-nav {
+        flex-direction: column;
+        gap: 30px;
+        align-items: flex-start;
+    }
+
+    .footer-nav-group {
+        width: 100%;
+    }
+}
+</style> 
