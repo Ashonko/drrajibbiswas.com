@@ -131,12 +131,36 @@ h6 {
 }
 
 /* Padding */
+.pt10 {
+  padding-top: 10px;
+}
+
+.pl10 {
+  padding-left: 10px;
+}
+
+.pr10 {
+  padding-right: 10px;
+}
+
 .pt20 {
   padding-top: 20px;
 }
 
+.pl20 {
+  padding-left: 20px;
+}
+
+.pr20 {
+  padding-right: 20px;
+}
+
 .pt40 {
   padding-top: 40px;
+}
+
+.pr40 {
+  padding-right: 40px;
 }
 
 .pt80 {
@@ -373,6 +397,15 @@ h6 {
 
 .color23 {
   background-color: #FF6C91;
+}
+
+/* Opacity */
+.op25 {
+  opacity: 0.25;
+}
+
+.op50 {
+  opacity: 0.5;
 }
 
 /* Custom style for underline and links */
