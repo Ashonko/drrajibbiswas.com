@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-M1LFYRZZ9Z"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-M1LFYRZZ9Z');
+    </script>
+
+    <title>A Reader's Journey - Dr Rajib Biswas</title>
+    <link rel="shortcut icon" href="/assets/img/web/rajibbiswas-icon.png" type="image/png" />
+
+    <!-- Meta -->
+    <meta name="title" content="A Reader's Journey - Dr Rajib Biswas">
+    <meta name="description"
+        content="Explore Dr Rajib Biswas's personal reading collection, book reviews, and literary journey across various genres including history, philosophy, technology, and Bengali literature">
+    <meta name="keywords"
+        content="Books, Reading List, Book Reviews, Rajib Biswas, Literature, Philosophy, History, Technology, Bengali Books">
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="language" content="English">
+    <meta name="revisit-after" content="30 days">
+    <meta name="author" content="Rajib Biswas">
+
+    <!-- Meta Social -->
+    <link rel="canonical" href="//drrajibbiswas.com/pages/cocurricular/a-readers-journey/" />
+    <meta name="generator" content="Rajib Biswas (https://drrajibbiswas.com)" />
+    <!-- Facebook -->
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="A Reader's Journey - Dr Rajib Biswas" />
+    <meta property="og:description"
+        content="Explore Dr Rajib Biswas's personal reading collection and book reviews across various genres" />
+    <meta property="og:url" content="//drrajibbiswas.com/pages/cocurricular/a-readers-journey/" />
+    <meta property="og:site_name" content="Dr Rajib Biswas" />
+    <meta property="og:image" content="/assets/img/web/drrajibbiswas.com-feature-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="675" />
+    <meta property="og:image:type" content="image/png" />
+    <!-- Twitter  -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="/assets/img/web/drrajibbiswas.com-feature-image.jpg" />
+    <meta property="twitter:url" content="//drrajibbiswas.com/pages/cocurricular/a-readers-journey/" />
+    <meta property="twitter:title" content="A Reader's Journey - Dr Rajib Biswas" />
+    <meta property="twitter:description"
+        content="Explore Dr Rajib Biswas's personal reading collection and book reviews across various genres" />
+    <meta property="twitter:image" content="/assets/img/web/drrajibbiswas.com-feature-image.jpg" />
+
+    <!-- Dependencies-->
+    <div id="dependencies"></div>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="bookshelf.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/assets/js/script.js" defer></script>
+    <script src="bookshelf.js" defer></script>
+</head>
+
+<body>
+    <!-- Navigation Section -->
+    <div id="navigation"></div>
+
+    <!-- Book Detail View (Hidden by default) -->
+    <div id="book-detail-view" class="d-none">
+        <div class="color17">
+            <div class="container" style="padding: 60px 0px 40px 0px;">
+                <div class="row">
+                    <div class="col-lg-6 col-sm-12">
+                        <h1 class="display-6 fw-bold lh-1 mb-3" id="book-detail-title"></h1>
+                        <p class="lead yellowBg">Book Details</p>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 text-end">
+                        <button class="mid-btn" onclick="showBookshelf()">
+                            <i class="fas fa-arrow-left"></i> Back to Bookshelf
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="height: 4px; background-color: dimgrey;"></div>
+        <div class="container" style="padding-top: 40px;">
+            <div class="row">
+                <div class="col-lg-4 col-md-5 mb-4">
+                    <img id="book-detail-cover" src="" class="img-fluid book-cover-detail" alt="">
+                </div>
+                <div class="col-lg-8 col-md-7">
+                    <div id="book-detail-content">
+                        <!-- Book details will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Bookshelf View -->
+    <div id="bookshelf-view">
+        <!-- Hero Section -->
+        <div class="color17">
+            <div class="container" style="padding: 60px 0px 60px 0px;">
+                <div class="container row">
+                    <div class="col-lg-6 col-sm-12">
+                        <h1 class="display-5 fw-bold lh-1 mb-3">A Reader's Journey</h1>
+                        <p class="lead yellowBg">Personal Reading Collection</p>
+                    </div>
+                    <div class="col-lg-6 col-sm-12"></div>
+                </div>
+            </div>
+        </div>
+        <div style="height: 4px; background-color: dimgrey;"></div>
+
+        <!-- Content Section -->
+        <div class="container pt80">
+            <!-- Introduction -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <h3>In the Company of Books</h3>
+                    <hr>
+                    <p>Reading has always been how I make sense of the world around me. The books you'll see here aren't
+                        just sitting on a shelf—they've genuinely
+                        shaped how I think about everything from human history to the future we're building together.
+                        Some completely flipped my worldview upside
+                        down, others felt like conversations with brilliant minds I'll never meet, and quite a few have
+                        become go-to references when I'm trying to
+                        understand complex ideas. This isn't just my reading list; it's really the story of how my
+                        thinking has evolved over the years. From Harari's
+                        sweeping takes on civilization to the Bengali novels that keep me connected to my heritage, each
+                        book here has taught me something I didn't know
+                        I needed to learn.</p>
+                    <p>Few have articulated the wonder of reading as beautifully as <a href="https://en.wikipedia.org/wiki/Carl_Sagan" class="linkDecExt">Carl Sagan</a> 
+                        - and I hold his words close:<br>
+                        “What an astonishing thing a book is. It's a flat object made from a tree with flexible parts on
+                        which are imprinted lots of funny dark
+                        squiggles. But one glance at it and you're inside the mind of another person, maybe somebody
+                        dead for thousands of years. Across the
+                        millennia, an author is speaking clearly and silently inside your head, directly to you. Writing
+                        is perhaps the greatest of human
+                        inventions, binding together people who never knew each other, citizens of distant epochs. Books
+                        break the shackles of time. A book is
+                        proof that humans are capable of working magic."
+                    </p>
+                </div>
+            </div>
+
+            <h4 id="reading-list-heading">My reading list</h4>
+            <hr>
+            <!-- Search and Filters -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <!-- Genre Filters - Full width -->
+                    <div class="row mb-3 pb10">
+                        <div class="col-12">
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="fw-bold me-2 pt10">Genres:</span>
+                                <button class="sm-btn genre-filter active" data-genre="all">All</button>
+                                <button class="sm-btn genre-filter" data-genre="History">History</button>
+                                <button class="sm-btn genre-filter" data-genre="Philosophy">Philosophy</button>
+                                <button class="sm-btn genre-filter" data-genre="Technology">Technology</button>
+                                <button class="sm-btn genre-filter" data-genre="Bengali Literature">Bengali
+                                    Literature</button>
+                                <button class="sm-btn genre-filter" data-genre="Fiction">Fiction</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Search Bar, Sort Options, and Status Filter -->
+                    <div class="row mb-3">
+                        <!-- Search Bar -->
+                        <div class="col-lg-4 col-md-12 mb-3">
+                            <div class="position-relative">
+                                <input type="text" id="search-input" class="form-control"
+                                    placeholder="Search books, authors, or descriptions...">
+                                <button id="clear-search"
+                                    class="btn position-absolute top-50 end-0 translate-middle-y me-2 d-none"
+                                    style="border: none; background: none; color: #666;">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Sort Options -->
+                        <div class="col-lg-4 col-md-12 mb-3">
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="fw-bold" style="min-width: 65px;">Sort by:</span>
+                                <select id="sort-select" class="form-select form-select-sm">
+                                    <option value="title">Title (A-Z)</option>
+                                    <option value="author">Author</option>
+                                    <option value="rating">My Rating</option>
+                                    <option value="dateRead">Date Read</option>
+                                    <option value="publishedDate">Publication Date</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Status Filter -->
+                        <div class="col-lg-4 col-md-12 mb-3">
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="fw-bold" style="min-width: 65px;">Status:</span>
+                                <select id="status-filter" class="form-select form-select-sm">
+                                    <option value="all">All Books</option>
+                                    <option value="Read">Read</option>
+                                    <option value="Currently Reading">Currently Reading</option>
+                                    <option value="Want to Read">Want to Read</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Book Count - Full width -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div id="book-count" class="text-muted"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Books Grid -->
+            <div class="row" id="books-grid">
+                <!-- Books will be populated here -->
+            </div>
+
+            <!-- Pagination -->
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div id="pagination-container"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pt80"></div>
+
+    <!-- Footer Section -->
+    <div id="footer"></div>
+</body>
+
+</html>
