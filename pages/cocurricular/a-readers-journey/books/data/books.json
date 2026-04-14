@@ -1,5 +1,37 @@
 [
   {
+    "id": "9780593135204",
+    "title": "Project Hail Mary",
+    "authors": ["Andy Weir"],
+    "coverImage": "books/covers/project_hail_mary_cover.jpg",
+    "description": "A science fiction novel about Ryland Grace, a lone astronaut who wakes up far from Earth with no memory of his mission. As he pieces together his identity, he must solve an extinction-level threat to save humanity, relying on science, resilience, and an unexpected friendship.",
+    "genres": ["Science Fiction", "Space", "Adventure", "Fiction"],
+    "pageCount": 496,
+    "publishedDate": "2021-05-04",
+    "myRating": null,
+    "status": "Currently Reading",
+    "dateRead": null,
+    "myReview": "",
+    "tags": ["sci-fi", "space", "andy-weir", "currently-reading"],
+    "moreInfoLink": "https://en.wikipedia.org/wiki/Project_Hail_Mary"
+  },
+  {
+    "id": "9780156012195",
+    "title": "The Little Prince",
+    "authors": ["Antoine de Saint-Exupéry"],
+    "coverImage": "books/covers/The little prince.jpg",
+    "description": "This is a beautiful book about a little prince who comes from a distant planet. He is a very wise and thoughtful prince who teaches about the importance of love and friendship.",
+    "genres": ["Fiction", "Classic", "Adventure"],
+    "pageCount": 83,
+    "publishedDate": "1943",
+    "myRating": 5,
+    "status": "Read",
+    "dateRead": "2025-09-20",
+    "myReview": "As the little prince said, \"All grown-ups were once children... but only few of them remember it.\"",
+    "tags": ["favorite", "classic", "must-read"],
+    "moreInfoLink": "https://en.wikipedia.org/wiki/The_Little_Prince"
+  },
+  {
     "id": "9780062316097",
     "title": "Sapiens: A Brief History of Humankind",
     "authors": ["Yuval Noah Harari"],
