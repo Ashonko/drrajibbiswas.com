@@ -1,0 +1,466 @@
+<div class="slide slide-analogy" data-transition="fade">
+    <style>
+        .slide-analogy {
+            padding: 60px 80px;
+        }
+
+        .slide-analogy .da-layout {
+            display: flex;
+            gap: 56px;
+            align-items: stretch;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* LEFT */
+        .slide-analogy .da-text {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .slide-analogy .da-text h1 {
+            font-size: 56px;
+            padding-top: 0;
+            margin-bottom: 8px;
+        }
+
+        .slide-analogy .da-text h2 {
+            font-family: var(--font-serif);
+            font-weight: 500;
+            font-size: 24px;
+            color: var(--text-muted);
+            margin-bottom: 28px;
+        }
+
+        .slide-analogy .da-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .slide-analogy .da-card {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: white;
+            padding: 14px 20px;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+            cursor: pointer;
+        }
+
+        .slide-analogy .da-card.active {
+            border-color: var(--text-primary);
+            transform: translateX(8px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+        }
+
+        .slide-analogy .da-card .da-icon {
+            width: 48px;
+            height: 48px;
+            background: #f8f8f8;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+
+        .slide-analogy .da-ctitle {
+            font-family: var(--font-sans);
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+
+        .slide-analogy .da-card.active .da-ctitle {
+            color: var(--text-primary);
+        }
+
+        .slide-analogy .da-csub {
+            font-size: 16px;
+            font-weight: 700;
+            color: #999;
+        }
+
+        /* RIGHT: viz panel */
+        .slide-analogy .da-viz-wrap {
+            flex: 1.2;
+            background: white;
+            border-radius: 16px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            padding: 24px;
+            position: relative;
+            height: 80%;
+            margin-top: 140px;
+        }
+
+        /* Step nav */
+        .slide-analogy .da-step-nav {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            flex-shrink: 0;
+        }
+
+        .slide-analogy .da-sbtn {
+            padding: 5px 14px;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            background: white;
+            color: var(--text-muted);
+            font-family: var(--font-sans);
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .slide-analogy .da-sbtn.active {
+            background: var(--text-primary);
+            border-color: var(--text-primary);
+            color: white;
+        }
+
+        /* Viz grid */
+        .slide-analogy .da-viz-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 16px;
+            flex: 1;
+            min-height: 0;
+        }
+
+        /* X-ray panel */
+        .slide-analogy .da-xray {
+            position: relative;
+            background: #000;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid #eee;
+        }
+
+        .slide-analogy .da-xray img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+        }
+
+        .slide-analogy .da-scan {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: rgba(0, 255, 136, 0.8);
+            box-shadow: 0 0 15px rgba(0, 255, 136, 1);
+            z-index: 5;
+            display: none;
+        }
+
+        .slide-analogy .da-scan.scanning {
+            display: block;
+            animation: daScan 2s linear infinite;
+        }
+
+        @keyframes daScan {
+            from {
+                top: 0%;
+            }
+
+            to {
+                top: 100%;
+            }
+        }
+
+        /* Network panel */
+        .slide-analogy .da-net-panel {
+            background: #fcfcfc;
+            border-radius: 8px;
+            border: 1px solid #eee;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #da-net-canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        /* Output bars */
+        .slide-analogy .da-output {
+            margin-top: 16px;
+            background: #fafafa;
+            border-radius: 10px;
+            padding: 16px;
+            border: 1px solid #eee;
+            flex-shrink: 0;
+        }
+
+        .slide-analogy .da-diag-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        .slide-analogy .da-dlabel {
+            width: 100px;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .slide-analogy .da-bar-bg {
+            flex: 1;
+            height: 8px;
+            background: #eee;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .slide-analogy .da-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: var(--text-primary);
+            transition: width 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+            border-radius: 4px;
+        }
+
+        .slide-analogy .da-dval {
+            width: 40px;
+            font-size: 14px;
+            font-family: monospace;
+            text-align: right;
+            color: var(--text-primary);
+        }
+
+        /* Step description */
+        .slide-analogy .da-step-desc {
+            margin-top: 12px;
+            font-family: var(--font-serif);
+            font-size: 17px;
+            line-height: 1.6;
+            color: var(--text-primary);
+            text-align: center;
+            flex-shrink: 0;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            padding-top: 12px;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide-analogy .da-step-desc span {
+            display: none;
+        }
+
+        .slide-analogy .da-step-desc span.da-vis {
+            display: block;
+            animation: anFadeIn 0.4s ease;
+        }
+    </style>
+
+    <div class="da-layout">
+        <!-- LEFT: cards -->
+        <div class="da-text">
+            <span class="label">The Biological Blueprint</span>
+            <h1>AI Radiologist</h1>
+            <h3>Hierarchical Intelligence</h3>
+
+            <div class="da-cards">
+                <div class="da-card active" data-da-step="1">
+                    <div class="da-icon">👁️</div>
+                    <div>
+                        <div class="da-ctitle">Low-Level Features (V1)</div>
+                        <div class="da-csub">Detecting edges, contrast &amp; pixels</div>
+                    </div>
+                </div>
+                <div class="da-card" data-da-step="2">
+                    <div class="da-icon">📐</div>
+                    <div>
+                        <div class="da-ctitle">Structural Assembly (V2)</div>
+                        <div class="da-csub">Building basic shapes &amp; textures</div>
+                    </div>
+                </div>
+                <div class="da-card" data-da-step="3">
+                    <div class="da-icon">🦴</div>
+                    <div>
+                        <div class="da-ctitle">Anatomical Context</div>
+                        <div class="da-csub">Recognizing ribs, heart &amp; borders</div>
+                    </div>
+                </div>
+                <div class="da-card" data-da-step="4">
+                    <div class="da-icon">🩺</div>
+                    <div>
+                        <div class="da-ctitle">Pathological Patterns</div>
+                        <div class="da-csub">Detecting consolidation &amp; opacities</div>
+                    </div>
+                </div>
+                <div class="da-card" data-da-step="5">
+                    <div class="da-icon">🧠</div>
+                    <div>
+                        <div class="da-ctitle">Clinical Synthesis</div>
+                        <div class="da-csub">Final probability &amp; diagnosis</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT: viz -->
+        <div class="da-viz-wrap">
+            <div class="da-step-nav">
+                <button class="da-sbtn active" data-da-step="1">V1</button>
+                <button class="da-sbtn" data-da-step="2">V2</button>
+                <button class="da-sbtn" data-da-step="3">Assoc.</button>
+                <button class="da-sbtn" data-da-step="4">Deep</button>
+                <button class="da-sbtn" data-da-step="5">Output</button>
+            </div>
+
+            <div class="da-viz-grid">
+                <div class="da-xray">
+                    <img src="assets/deep-learning/x-ray-pneumonia.jpeg" alt="Chest X-Ray">
+                    <div class="da-scan scanning" id="da-scan-line"></div>
+                </div>
+                <div class="da-net-panel"><canvas id="da-net-canvas"></canvas></div>
+            </div>
+
+            <div class="da-output">
+                <div class="da-diag-row">
+                    <div class="da-dlabel">Pneumonia</div>
+                    <div class="da-bar-bg">
+                        <div class="da-bar-fill" id="da-bar-p"></div>
+                    </div>
+                    <div class="da-dval" id="da-val-p">0%</div>
+                </div>
+                <div class="da-diag-row">
+                    <div class="da-dlabel">Normal</div>
+                    <div class="da-bar-bg">
+                        <div class="da-bar-fill" id="da-bar-n" style="background:#ccc;"></div>
+                    </div>
+                    <div class="da-dval" id="da-val-n">0%</div>
+                </div>
+            </div>
+
+            <div class="da-step-desc">
+                <span class="da-vis" data-da-s="1"><strong>1. Input Layer / V1:</strong> Like your primary visual
+                    cortex, the network begins by detecting raw edges and contrast in pixel space.</span>
+                <span data-da-s="2"><strong>2. First Hidden Layers / V2:</strong> Local edges are assembled into
+                    textures. The network "sees" the graininess of the lung fields.</span>
+                <span data-da-s="3"><strong>3. Middle Layers / Association Cortex:</strong> The network identifies
+                    anatomical landmarks — ribs, heart borders, and diaphragmatic curves.</span>
+                <span data-da-s="4"><strong>4. Deep Hidden Layers / Frontal Lobe:</strong> The network recognizes
+                    pathological patterns — ground-glass opacities and air bronchograms.</span>
+                <span data-da-s="5"><strong>5. Output Layer:</strong> Relentless arithmetic converges on a final
+                    probability. The network predicts pneumonia based on millions of internal parameters.</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            const slideEl = document.currentScript.closest('.slide');
+            const canvas = document.getElementById('da-net-canvas');
+            const ctx = canvas.getContext('2d');
+            let currentStep = 1, pulses = [], rafId = null;
+
+            const LAYERS = [{ nodes: 5, color: '#1a1a1a' }, { nodes: 7, color: '#444' }, { nodes: 7, color: '#666' }, { nodes: 5, color: '#888' }, { nodes: 2, color: '#1a1a1a' }];
+            let layerPos = [];
+
+            function resize() {
+                const rect = canvas.parentElement.getBoundingClientRect();
+                const dpr = window.devicePixelRatio || 1;
+                canvas.width = rect.width * dpr; canvas.height = rect.height * dpr;
+                ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.scale(dpr, dpr);
+                layerPos = [];
+                const w = rect.width, h = rect.height, mx = 36, my = 32;
+                const xs = (w - mx * 2) / (LAYERS.length - 1);
+                LAYERS.forEach((l, li) => {
+                    const x = mx + li * xs, ys = l.nodes > 1 ? (h - my * 2) / (l.nodes - 1) : 0;
+                    const yStart = l.nodes === 1 ? h / 2 : my;
+                    layerPos.push(Array.from({ length: l.nodes }, (_, ni) => ({ x, y: yStart + ni * ys })));
+                });
+            }
+
+            function drawNet() {
+                if (!rafId) return;
+                rafId = requestAnimationFrame(drawNet);
+                const rect = canvas.parentElement.getBoundingClientRect();
+                ctx.clearRect(0, 0, rect.width, rect.height);
+
+                for (let li = 0; li < layerPos.length - 1; li++) {
+                    const active = currentStep > li;
+                    ctx.lineWidth = active ? 1 : 0.5;
+                    ctx.strokeStyle = active ? 'rgba(0,0,0,0.15)' : 'rgba(0,0,0,0.05)';
+                    layerPos[li].forEach(p1 => layerPos[li + 1].forEach(p2 => {
+                        ctx.beginPath(); ctx.moveTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y); ctx.stroke();
+                    }));
+                }
+
+                pulses = pulses.filter(p => {
+                    p.t += p.speed;
+                    if (p.t >= 1) return false;
+                    ctx.beginPath(); ctx.arc(p.x1 + (p.x2 - p.x1) * p.t, p.y1 + (p.y2 - p.y1) * p.t, 2, 0, Math.PI * 2);
+                    ctx.fillStyle = p.color; ctx.fill();
+                    return true;
+                });
+
+                layerPos.forEach((nodes, li) => {
+                    const active = currentStep >= li + 1;
+                    nodes.forEach(p => {
+                        ctx.fillStyle = active ? LAYERS[li].color : '#eee';
+                        ctx.beginPath(); ctx.arc(p.x, p.y, (li === 0 || li === 4) ? 6 : 4, 0, Math.PI * 2); ctx.fill();
+                        if (active) { ctx.strokeStyle = '#fff'; ctx.lineWidth = 1; ctx.stroke(); }
+                    });
+                });
+
+                if (currentStep < 5 && Math.random() > 0.8) {
+                    const li = currentStep - 1;
+                    if (li < layerPos.length - 1) {
+                        const a = layerPos[li][Math.floor(Math.random() * layerPos[li].length)];
+                        const b = layerPos[li + 1][Math.floor(Math.random() * layerPos[li + 1].length)];
+                        pulses.push({ x1: a.x, y1: a.y, x2: b.x, y2: b.y, t: 0, speed: 0.02 + Math.random() * 0.02, color: LAYERS[li].color });
+                    }
+                }
+            }
+
+            function setStep(s) {
+                currentStep = s;
+                slideEl.querySelectorAll('.da-card,.da-sbtn').forEach(el => el.classList.toggle('active', parseInt(el.dataset.daStep) === s));
+                slideEl.querySelectorAll('.da-step-desc span').forEach(el => el.classList.toggle('da-vis', parseInt(el.dataset.daS) === s));
+                const scan = document.getElementById('da-scan-line');
+                if (scan) scan.classList.toggle('scanning', s < 5);
+                const pB = document.getElementById('da-bar-p'), pV = document.getElementById('da-val-p');
+                const nB = document.getElementById('da-bar-n'), nV = document.getElementById('da-val-n');
+                if (s === 5) { pB.style.width = '91%'; pV.textContent = '91%'; nB.style.width = '7%'; nV.textContent = '7%'; }
+                else { pB.style.width = '0%'; pV.textContent = '0%'; nB.style.width = '0%'; nV.textContent = '0%'; }
+            }
+
+            function startAnim() { if (rafId) return; resize(); setStep(1); rafId = 1; drawNet(); }
+            function stopAnim() { rafId = null; }
+
+            // ── Custom Hooks for main.js ──
+            slideEl.customNext = () => { if (currentStep < 5) { setStep(currentStep + 1); return true; } return false; };
+            slideEl.customPrev = () => { if (currentStep > 1) { setStep(currentStep - 1); return true; } return false; };
+
+            slideEl.querySelectorAll('.da-card,.da-sbtn').forEach(el => el.addEventListener('click', e => { e.stopPropagation(); setStep(parseInt(el.dataset.daStep)); }));
+
+            new MutationObserver(() => slideEl.classList.contains('active') ? startAnim() : stopAnim()).observe(slideEl, { attributes: true, attributeFilter: ['class'] });
+            window.addEventListener('resize', () => { if (rafId) resize(); });
+        })();
+    </script>
+</div>

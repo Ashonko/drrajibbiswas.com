@@ -1,0 +1,172 @@
+<div class="slide slide-agi" data-transition="wipe" style="padding: 0; overflow: hidden;">
+    <style>
+        .slide-agi .agi-layout {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            align-items: stretch;
+            gap: 0;
+        }
+
+        /* ── LEFT COLUMN: Text & Labs ── */
+        .slide-agi .agi-text-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 60px 60px 60px 100px;
+        }
+
+        .slide-agi h1 {
+            font-size: 58px;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            padding-top: 0;
+            font-weight: 800;
+        }
+
+        .slide-agi .media-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            padding-bottom: 12px;
+            margin-bottom: 24px;
+            margin-top: 10px;
+        }
+
+        .slide-agi .media-header-row h3 {
+            font-size: 16px;
+            margin: 0;
+            color: var(--text-muted);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-family: var(--font-sans);
+        }
+
+        .slide-agi .badge-tag {
+            background: #000;
+            color: #fff;
+            padding: 3px 12px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 700;
+            font-family: var(--font-sans);
+        }
+
+        /* Lab Grid */
+        .slide-agi .lab-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        .slide-agi .lab-item {
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            border-radius: 8px;
+            padding: 12px 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+        }
+
+        .slide-agi .lab-item img {
+            height: 32px;
+            width: auto;
+            max-width: 90%;
+            object-fit: contain;
+        }
+
+        .slide-agi .lab-name {
+            font-family: var(--font-sans);
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        /* ── RIGHT COLUMN: Media ── */
+        .slide-agi .agi-photo-col {
+            flex: 0 0 44%;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: stretch;
+            background: #000;
+        }
+
+        .slide-agi .agi-photo-fill {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            filter: contrast(1.05) brightness(0.9);
+        }
+
+        .slide-agi .agi-photo-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100px;
+            height: 100%;
+            background: linear-gradient(to left, transparent 0%, var(--bg-color) 100%);
+            pointer-events: none;
+        }
+
+        .slide-agi .agi-photo-caption {
+            position: absolute;
+            bottom: 28px;
+            right: 32px;
+            font-family: var(--font-sans);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.6);
+        }
+    </style>
+
+    <div class="agi-layout">
+        <!-- Left: Content -->
+        <div class="agi-text-col" style="margin-top: -40px;">
+            <span class="label">Part 04 — The Race</span>
+            <h1>The AGI Race</h1>
+            <h3>The Race for Artificial General Intelligence</h3>
+
+            <div class="media-header-row">
+                <h3>The AGI Frontier Labs</h3>
+                <span class="badge-tag">2025</span>
+            </div>
+
+            <div class="lab-grid">
+                <div class="lab-item"><img src="assets/The AGI Race/OpenAI-logo.png" alt="OpenAI">
+                    <div class="lab-name">ChatGPT</div>
+                </div>
+                <div class="lab-item"><img src="assets/The AGI Race/Anthropic-logo.svg" alt="Anthropic">
+                    <div class="lab-name">Claude</div>
+                </div>
+                <div class="lab-item"><img src="assets/The AGI Race/Google DeepMind-logo.png" alt="DeepMind">
+                    <div class="lab-name">Gemini</div>
+                </div>
+                <div class="lab-item"><img src="assets/The AGI Race/Meta AI-logo.png" alt="Meta AI">
+                    <div class="lab-name">LLaMA</div>
+                </div>
+                <div class="lab-item"><img src="assets/The AGI Race/xAI-logo.png" alt="xAI">
+                    <div class="lab-name">Grok</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right: Media -->
+        <div class="agi-photo-col">
+            <img class="agi-photo-fill" src="assets/The AGI Race/The AGI Race.jpg" alt="The AGI Race illustration">
+            <div class="agi-photo-overlay"></div>
+            <div class="agi-photo-caption">Synthesized Visual: The Race for General Intelligence</div>
+        </div>
+    </div>
+</div>

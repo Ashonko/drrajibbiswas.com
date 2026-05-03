@@ -1,0 +1,353 @@
+<div class="slide slide-blackbox" data-transition="fade" style="padding:56px 72px 40px; overflow:hidden;">
+    <style>
+        .slide-blackbox .bb-inner {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+            gap: 28px;
+        }
+
+        .slide-blackbox .bb-hdr h1 {
+            font-size: 58px;
+            line-height: 1.1;
+            margin-bottom: 8px;
+            padding-top: 0;
+        }
+
+        .slide-blackbox .bb-hdr h2 {
+            font-family: var(--font-serif);
+            font-weight: 400;
+            color: var(--text-muted);
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .slide-blackbox .bb-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 40px;
+            flex: 1;
+            min-height: 0;
+            align-items: start;
+        }
+
+        /* Paper card */
+        .slide-blackbox .bb-paper {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.04);
+        }
+
+        .slide-blackbox .bb-paper-thumb {
+            position: relative;
+            overflow: hidden;
+            line-height: 0;
+        }
+
+        .slide-blackbox .bb-paper-thumb img {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+            object-position: top;
+            display: block;
+        }
+
+        .slide-blackbox .bb-paper-thumb::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: linear-gradient(to bottom, transparent, #fff);
+            pointer-events: none;
+        }
+
+        .slide-blackbox .bb-paper-info {
+            padding: 14px 18px;
+        }
+
+        .slide-blackbox .bb-paper-info strong {
+            font-family: var(--font-sans);
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        /* Right card */
+        .slide-blackbox .bb-card {
+            background: #fff;
+            border: 1.5px solid #eaeaea;
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+        }
+
+        .slide-blackbox .bb-card-hdr {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 12px;
+        }
+
+        .slide-blackbox .bb-card-hdr span {
+            font-family: var(--font-sans);
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            color: var(--text-muted);
+        }
+
+        .slide-blackbox .bb-tag {
+            background: #000;
+            color: #fff;
+            padding: 3px 12px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 700;
+            font-family: var(--font-sans);
+        }
+
+        /* Black-box viz */
+        .slide-blackbox .bb-viz {
+            background: #fafafa;
+            border-radius: 10px;
+            padding: 16px;
+            border: 1px solid #f0f0f0;
+        }
+
+        .slide-blackbox .bb-viz-lbl {
+            font-family: var(--font-sans);
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .slide-blackbox .bb-flow {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .slide-blackbox .bb-node {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            flex: 1;
+        }
+
+        .slide-blackbox .bb-circle {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            transition: opacity .2s ease;
+        }
+
+        .slide-blackbox .bb-circle.inp {
+            background: #e0f2fe;
+        }
+
+        .slide-blackbox .bb-circle.hid {
+            background: #1a1a1a;
+            color: #fff;
+            font-size: 18px;
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+        }
+
+        .slide-blackbox .bb-circle.out {
+            background: #dcfce7;
+        }
+
+        .slide-blackbox .bb-nlbl {
+            font-family: var(--font-sans);
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            text-align: center;
+        }
+
+        .slide-blackbox .bb-sub {
+            font-family: 'Space Mono', monospace;
+            font-size: 13px;
+            color: #888;
+            text-align: center;
+            margin-top: 2px;
+        }
+
+        .slide-blackbox .bb-arrow {
+            font-size: 18px;
+            color: #ccc;
+            flex-shrink: 0;
+        }
+
+        /* Compare */
+        .slide-blackbox .bb-compare {
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #eee;
+        }
+
+        .slide-blackbox .bb-cr {
+            display: flex;
+        }
+
+        .slide-blackbox .bb-cc {
+            flex: 1;
+            padding: 14px 16px;
+        }
+
+        .slide-blackbox .bb-cc.phy {
+            background: #f0fdf4;
+            border-right: 1px solid #eee;
+        }
+
+        .slide-blackbox .bb-cc.ai {
+            background: #fff7ed;
+        }
+
+        .slide-blackbox .bb-cc-title {
+            font-family: var(--font-sans);
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .8px;
+            margin-bottom: 8px;
+        }
+
+        .slide-blackbox .bb-cc.phy .bb-cc-title {
+            color: #166534;
+        }
+
+        .slide-blackbox .bb-cc.ai .bb-cc-title {
+            color: #9a3412;
+        }
+
+        .slide-blackbox .bb-ci {
+            font-family: var(--font-serif);
+            font-size: 20px;
+            color: var(--text-primary);
+            line-height: 1.5;
+            margin-bottom: 4px;
+        }
+    </style>
+
+    <div class="bb-inner">
+        <div class="bb-hdr">
+            <span class="label">The Explainability Crisis</span>
+            <h1>The Black Box Problem</h1>
+            <h3>AI cannot tell you why.</h3>
+        </div>
+
+        <div class="bb-grid">
+            <div class="bb-paper">
+                <div class="bb-paper-thumb"><img src="assets/The Black Box/Screenshot-of-paper-by-Ziad Obermeyer.png"
+                        alt="Obermeyer Science 2019"></div>
+                <div class="bb-paper-info"><strong>Obermeyer et al., <em>Science</em> 2019</strong></div>
+            </div>
+
+            <div class="bb-card">
+                <div class="bb-card-hdr"><span>Inside the Black Box</span><span class="bb-tag"
+                        style="color: white;">Explainability</span></div>
+                <div class="bb-viz">
+                    <div class="bb-viz-lbl">Deep learning — what we see vs. what happens inside</div>
+                    <div class="bb-flow">
+                        <div class="bb-node">
+                            <div class="bb-circle inp">🫁</div>
+                            <div class="bb-nlbl">CT Scan Input</div>
+                        </div>
+                        <div class="bb-arrow">→</div>
+                        <div class="bb-node">
+                            <div class="bb-circle hid" id="bb-node">?</div>
+                            <div class="bb-nlbl">Hidden Layers</div>
+                            <div class="bb-sub" id="bb-sub">1.2B parameters</div>
+                        </div>
+                        <div class="bb-arrow">→</div>
+                        <div class="bb-node">
+                            <div class="bb-circle out">✓</div>
+                            <div class="bb-nlbl">PE: 94%</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bb-compare">
+                    <div class="bb-cr">
+                        <div class="bb-cc phy">
+                            <div class="bb-cc-title">Physician</div>
+                            <div class="bb-ci">✓ D-dimer ↑</div>
+                            <div class="bb-ci">✓ Wells score 6</div>
+                            <div class="bb-ci">✓ Filling defect on CT-PA</div>
+                            <div class="bb-ci">→ PE diagnosis</div>
+                        </div>
+                        <div class="bb-cc ai">
+                            <div class="bb-cc-title">Deep Learning</div>
+                            <div class="bb-ci">? Activations in layer 47</div>
+                            <div class="bb-ci">? Gradient through 312 layers</div>
+                            <div class="bb-ci">? Learned: IV line brand?</div>
+                            <div class="bb-ci">→ PE: 94%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            const slideEl = document.currentScript.closest('.slide');
+            const nd = document.getElementById('bb-node'), sb = document.getElementById('bb-sub');
+            if (!nd || !sb) return;
+            nd.style.transition = 'opacity .2s ease';
+
+            const states = [
+                { i: '?', t: '1.2B parameters' },
+                { i: '∑', t: 'Weighted sum ×312' },
+                { i: 'σ', t: 'ReLU activation' },
+                { i: '⊗', t: 'Attention heads' },
+                { i: '∇', t: 'Gradient flow' },
+                { i: '?', t: 'Why? Unknown.' }
+            ];
+            let idx = 0, timer = null;
+
+            function start() {
+                if (timer) return;
+                timer = setInterval(() => {
+                    idx = (idx + 1) % states.length;
+                    nd.style.opacity = '0';
+                    setTimeout(() => {
+                        nd.textContent = states[idx].i;
+                        nd.style.color = idx === states.length - 1 ? '#ef4444' : '#fff';
+                        sb.textContent = states[idx].t;
+                        nd.style.opacity = '1';
+                    }, 200);
+                }, 1400);
+            }
+
+            function stop() {
+                if (timer) { clearInterval(timer); timer = null; }
+            }
+
+            new MutationObserver(() => {
+                slideEl.classList.contains('active') ? start() : stop();
+            }).observe(slideEl, { attributes: true, attributeFilter: ['class'] });
+        })();
+    </script>
+</div>

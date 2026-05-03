@@ -1,0 +1,136 @@
+<div class="slide thank-you-slide" data-transition="fade">
+  <style>
+    /* FIX: Removed 'display: flex' from here so it respects the engine's hidden state */
+    .thank-you-slide {
+      background-color: var(--bg-color);
+      color: var(--text-primary);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 10vw;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .thank-you-content {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 900px;
+    }
+
+    .thank-you-slide h1 {
+      font-family: var(--font-sans);
+      font-size: clamp(3.5rem, 10vw, 7rem);
+      font-weight: 800;
+      letter-spacing: -4px;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+      line-height: 1;
+      padding-top: 0;
+    }
+
+    .thank-you-slide h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.2rem, 2.8vw, 2.2rem);
+      font-weight: 400;
+      color: var(--text-muted);
+      margin-bottom: 4.5rem;
+      letter-spacing: -0.5px;
+    }
+
+    .contact-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4rem;
+      margin-top: 4rem;
+      padding-top: 3rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.08);
+      width: 100%;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      text-align: left;
+    }
+
+    .presenter-name {
+      font-family: var(--font-sans);
+      font-size: 2.0rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.2px;
+    }
+
+    .presenter-title {
+      font-family: var(--font-sans);
+      font-size: 1.5rem;
+      color: var(--text-muted);
+      letter-spacing: 2px;
+      font-weight: 600;
+    }
+
+    .contact-qr img {
+      width: 256px;
+      height: 256px;
+      display: block;
+      filter: grayscale(10%) contrast(105%);
+      transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .contact-qr img:hover {
+      transform: scale(1.08);
+    }
+
+    /* Airy background elements */
+    .bg-light-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      z-index: 1;
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .blob-1 {
+      width: 50vw;
+      height: 50vw;
+      background: #e0e7ff; /* Soft indigo */
+      top: -20%;
+      right: -10%;
+      animation: drift 25s infinite alternate ease-in-out;
+    }
+
+    .blob-2 {
+      width: 45vw;
+      height: 45vw;
+      background: #fef3c7; /* Soft amber */
+      bottom: -15%;
+      left: -15%;
+      animation: drift 30s infinite alternate-reverse ease-in-out;
+    }
+
+    @keyframes drift {
+      0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+      100% { transform: translate(15%, 15%) scale(1.1) rotate(15deg); }
+    }
+  </style>
+
+  <div class="bg-light-blob blob-1"></div>
+  <div class="bg-light-blob blob-2"></div>
+
+  <div class="thank-you-content">
+    <h1>Thank You.</h1>
+    <h2>The future of healthcare begins with you.</h2>
+    <div class="divider" style="margin:0 auto 28px;"></div>
+    <div class="presenter-name">Dr Rajib Biswas</div>
+        <div class="presenter-title"><a href="https://www.drrajibbiswas.com" target="_blank" style="text-decoration: none; color: #9191E9;">www.drrajibbiswas.com</a></div>
+  </div>
+</div>

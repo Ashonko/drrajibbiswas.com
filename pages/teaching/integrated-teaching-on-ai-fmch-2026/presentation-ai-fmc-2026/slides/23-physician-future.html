@@ -1,0 +1,212 @@
+<div class="slide risks-slide" data-transition="fade">
+  <style>
+    .risks-slide {
+      background-color: var(--bg-color);
+      padding: 2.2rem 5% 1.5rem 5%;
+      box-sizing: border-box;
+      overflow: hidden;
+      flex-direction: column;
+    }
+
+    .risks-header {
+      margin-bottom: 1.8rem;
+      width: 100%;
+      flex-shrink: 0;
+    }
+
+    .risks-header .badge {
+      margin-bottom: 0.6rem;
+    }
+
+    .risks-header h1 {
+      font-size: clamp(2.4rem, 4.2vw, 3.8rem);
+      margin-bottom: 0;
+      line-height: 1.1;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      padding-top: 0;
+    }
+
+    /* ── Grid Layout ── */
+    .risks-grid {
+      display: grid;
+      grid-template-columns: 0.8fr 1.4fr;
+      gap: 3.5rem;
+      flex: 1;
+      min-height: 0;
+      align-items: start;
+    }
+
+    /* ── Death by GPS Card ── */
+    .death-gps-section {
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.04);
+      width: 100%;
+    }
+
+    .death-gps-thumb {
+      width: 100%;
+      max-height: 480px;
+      position: relative;
+      flex-shrink: 0;
+      line-height: 0;
+      overflow: hidden;
+    }
+
+    .death-gps-thumb img {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transition: transform 12s linear;
+    }
+
+    .risks-slide.active .death-gps-thumb img {
+      transform: scale(1.1);
+    }
+
+    .death-gps-info {
+      padding: 1rem 1.4rem;
+      background: white;
+      border-top: 1px solid #f0f0f0;
+    }
+
+    .death-gps-title {
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    /* ── Practical Guide Card ── */
+    .risks-media-card {
+      background: #ffffff;
+      border: 1.5px solid #eaeaea;
+      border-radius: 16px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.6rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+      width: 100%;
+    }
+
+    .badge-tag {
+      background: #000;
+      color: #fff;
+      padding: 5px 14px;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      font-family: var(--font-sans);
+    }
+
+    .three-q {
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+
+    .three-q-title {
+      font-family: var(--font-sans);
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--text-muted);
+      margin-bottom: 1.2rem;
+    }
+
+    .q-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      font-family: var(--font-serif);
+      /* font-size: 1.2rem; */
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .q-num {
+      font-family: var(--font-sans);
+      font-size: 20px;
+      font-weight: 800;
+      background: #1a1a1a;
+      color: #fff;
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* Cardinal rule */
+    .cardinal-rule {
+      background: #1a1a1a;
+      color: #fff;
+      border-radius: 12px;
+      padding: 1.5rem 1.8rem;
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      line-height: 1.7;
+    }
+
+    .cardinal-rule strong {
+      color: #fcd34d;
+      font-weight: 600;
+    }
+  </style>
+
+  <!-- HEADER -->
+  <div class="risks-header">
+    <div class="label">Part Five — The Physician of the Future</div>
+    <h1>Risks in Your Hands</h1>
+  </div>
+
+  <!-- CONTENT GRID -->
+  <div class="risks-grid">
+    <!-- LEFT: Media Illustration -->
+    <div class="risks-left">
+        <h3>Questions Before Trusting an AI Responses</h3>
+      <div class="death-gps-section">
+        <div class="death-gps-thumb">
+          <img src="assets/Death by GPS/Death by GPS.png" alt="Death by GPS illustration">
+        </div>
+        <div class="death-gps-info">
+          <div class="death-gps-title">"Death by GPS" — A Warning for over-reliance on AI, ignoring real-world cues</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Practical guidance -->
+    <div class="risks-right" style="margin-top: 24px;">
+      <div class="risks-media-card">
+        <!-- Three questions -->
+        <div class="three-q">
+          <div class="q-item" data-step="1">
+            <div class="q-num">1</div>Does this actually apply to me? 
+            <br>Is the AI using data that fits my specific situation, location, or background?
+          </div>
+          <div class="q-item" data-step="2">
+            <div class="q-num">2</div>Is it a fact or a guess? <br>Is there real evidence for this answer, or is the AI just sounding confident?
+          </div>
+          <div class="q-item" data-step="3">
+            <div class="q-num">3</div>Is the answer consistent? <br>If I ask the same question in a different way, do I get the same result?
+          </div>
+          <div class="q-item" data-step="4">
+            <div class="q-num">4</div>Who owns the company behind this AI? <br>Do they have a history of ethical behavior, or are they known for cutting corners?
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

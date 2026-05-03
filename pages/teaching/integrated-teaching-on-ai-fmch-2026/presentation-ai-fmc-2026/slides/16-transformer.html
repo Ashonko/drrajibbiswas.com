@@ -1,0 +1,374 @@
+<div class="slide transformer-slide" data-transition="fade">
+    <style>
+        .transformer-slide {
+            padding: 3.5rem 4.5rem;
+            gap: 2.5rem;
+            box-sizing: border-box;
+            justify-content: flex-start;
+            /* Aligns content to the top */
+        }
+
+        .transformer-header {
+            max-width: 1200px;
+        }
+
+        .transformer-header .badge {
+            margin-bottom: 0.8rem;
+        }
+
+        .transformer-header h1 {
+            font-size: clamp(2.4rem, 4.5vw, 4rem);
+            margin-bottom: 0.6rem;
+            line-height: 1.05;
+            padding-top: 0;
+        }
+
+        .transformer-header h2 {
+            font-family: var(--font-serif);
+            font-weight: 400;
+            color: var(--text-muted);
+            font-size: clamp(1rem, 1.8vw, 1.5rem);
+            margin-bottom: 0;
+            text-transform: none;
+            letter-spacing: normal;
+        }
+
+        .transformer-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.1fr;
+            gap: 3.5rem;
+            align-items: start;
+            flex: 1;
+            min-height: 0;
+            width: 100%;
+        }
+
+        /* ── Paper card (media side) ── */
+        .transformer-media-card {
+            background: #ffffff;
+            border: 1.5px solid #eaeaea;
+            border-radius: 16px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+        }
+
+        .media-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 0.75rem;
+        }
+
+        .media-header-row h3 {
+            font-size: 0.82rem;
+            margin: 0;
+            color: var(--text-muted);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .year-tag-2017 {
+            background: #000;
+            color: #fff;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            font-family: var(--font-sans);
+        }
+
+        .paper-screenshot {
+            width: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #eee;
+        }
+
+        .paper-screenshot img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: contrast(1.03);
+        }
+
+        /* Portrait row */
+        .author-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-portrait {
+            width: 128px;
+            height: 128px;
+            border-radius: 50%;
+            overflow: hidden;
+            flex-shrink: 0;
+            border: 2px solid #eee;
+            background: #f0f0f0;
+        }
+
+        .author-portrait img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(10%) contrast(1.05);
+        }
+
+        .author-row {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            padding: 1rem 1.25rem;
+            background: #fbfbfb;
+            border: 1px solid #f0f0f0;
+            border-radius: 12px;
+        }
+
+        .author-info {
+            flex: 1;
+        }
+
+        .author-name {
+            font-family: var(--font-sans);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 2px;
+        }
+
+        .author-role {
+            font-size: 1.0rem;
+            color: var(--text-muted);
+            font-family: var(--font-sans);
+        }
+
+        .paper-reveal-left {
+            width: 100%;
+        }
+
+        .paper-reveal-left img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ddd;
+        }
+
+        /* ── Attention visualizer (enlarged & centered) ── */
+        .attention-viz {
+            background: #fafafa;
+            border-radius: 16px;
+            padding: 1rem 2rem;
+            border: 1px solid #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+            margin-top: 0;
+        }
+
+        .attention-viz-label {
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+        }
+
+        .attention-tokens {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            justify-content: center;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .attn-token {
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: #ebebeb;
+            color: var(--text-muted);
+            transition: all 0.4s ease;
+            cursor: default;
+        }
+
+        .attn-token.attn-source {
+            background: #1a1a1a;
+            color: #fff;
+        }
+
+        .attn-token.attn-high {
+            background: #3b82f6;
+            color: #fff;
+            transform: scale(1.08);
+        }
+
+        .attn-token.attn-medium {
+            background: #93c5fd;
+            color: #1e3a8a;
+        }
+
+        .attn-token.attn-low {
+            background: #e0e8ff;
+            color: #6b7280;
+        }
+
+        .attn-legend {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 0.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .attn-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-family: var(--font-sans);
+            font-size: 16px;
+            padding-top: 10px;
+            color: var(--text-muted);
+        }
+
+        .attn-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+    </style>
+
+    <!-- Narrative on top -->
+    <div class="transformer-header">
+        <div class="label">2017 — Google Brain</div>
+        <h1>Attention Is All You Need</h1>
+        <h3>The architecture that gave birth to ChatGPT, Gemini, and Claude</h3>
+    </div>
+
+    <div class="transformer-grid">
+        <!-- LEFT: Paper Screenshot -->
+        <div class="transformer-col-paper">
+            <div class="paper-reveal-left">
+                <img src="assets/2017/Attention Is All You Need-article-screenshot.png"
+                    alt="Attention Is All You Need paper">
+            </div>
+        </div>
+
+        <!-- RIGHT: Author + attention viz -->
+        <div class="transformer-col-media">
+            <div class="transformer-media-card">
+                <div class="author-row">
+                    <div class="author-portrait"><img src="assets/2017/Ashish Vaswani.jpeg" alt="Ashish Vaswani"></div>
+                    <div class="author-info">
+                        <div class="author-name">Ashish Vaswani</div>
+                        <div class="author-role">Lead author — Google Brain, 2017</div>
+                    </div>
+                </div>
+
+                <!-- Attention visualizer -->
+                <div class="attention-viz">
+                    <div class="attention-viz-label">Self-Attention — live demo</div>
+                    <div class="attention-tokens" id="attn-tokens"></div>
+                    <div class="attn-legend">
+                        <div class="attn-legend-item">
+                            <div class="attn-dot" style="background:#1a1a1a"></div>Focus word
+                        </div>
+                        <div class="attn-legend-item">
+                            <div class="attn-dot" style="background:#3b82f6"></div>High relevance
+                        </div>
+                        <div class="attn-legend-item">
+                            <div class="attn-dot" style="background:#93c5fd"></div>Medium
+                        </div>
+                        <div class="attn-legend-item">
+                            <div class="attn-dot" style="background:#e0e8ff"></div>Low
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            const slideEl = document.currentScript.closest('.slide');
+            const sentences = [
+                {
+                    tokens: ['The', 'patient', 'received', 'a', 'beta-blocker', 'because', 'of', 'his', 'tachycardia'],
+                    cycles: [
+                        { source: 4, high: [8], medium: [1, 2], low: [0, 3, 5, 6, 7] },
+                        { source: 8, high: [4], medium: [1, 5], low: [0, 2, 3, 6, 7] },
+                        { source: 7, high: [1], medium: [4, 8], low: [0, 2, 3, 5, 6] },
+                    ]
+                },
+                {
+                    tokens: ['SGLT2', 'inhibitors', 'reduce', 'HFrEF', 'mortality', 'independent', 'of', 'diabetes'],
+                    cycles: [
+                        { source: 0, high: [1], medium: [3, 4], low: [2, 5, 6, 7] },
+                        { source: 4, high: [3], medium: [0, 1], low: [2, 5, 6, 7] },
+                        { source: 7, high: [5], medium: [4], low: [0, 1, 2, 3, 6] },
+                    ]
+                }
+            ];
+
+            let sentIdx = 0, cycleIdx = 0, intervalId = null;
+
+            function applyAttention() {
+                const container = document.getElementById('attn-tokens');
+                if (!container) return;
+
+                const s = sentences[sentIdx];
+                const c = s.cycles[cycleIdx];
+
+                container.innerHTML = '';
+                s.tokens.forEach((tok, i) => {
+                    const span = document.createElement('span');
+                    span.className = 'attn-token';
+                    span.textContent = tok;
+                    if (i === c.source) span.classList.add('attn-source');
+                    else if (c.high.includes(i)) span.classList.add('attn-high');
+                    else if (c.medium.includes(i)) span.classList.add('attn-medium');
+                    else span.classList.add('attn-low');
+                    container.appendChild(span);
+                });
+            }
+
+            function tick() {
+                const s = sentences[sentIdx];
+                cycleIdx = (cycleIdx + 1) % s.cycles.length;
+                if (cycleIdx === 0) sentIdx = (sentIdx + 1) % sentences.length;
+                applyAttention();
+            }
+
+            function startViz() {
+                if (intervalId) return;
+                applyAttention();
+                intervalId = setInterval(tick, 2200);
+            }
+
+            function stopViz() {
+                if (intervalId) { clearInterval(intervalId); intervalId = null; }
+            }
+
+            // Automatically play/pause based on slide visibility
+            new MutationObserver(() => {
+                slideEl.classList.contains('active') ? startViz() : stopViz();
+            }).observe(slideEl, { attributes: true, attributeFilter: ['class'] });
+
+        })();
+    </script>
+</div>

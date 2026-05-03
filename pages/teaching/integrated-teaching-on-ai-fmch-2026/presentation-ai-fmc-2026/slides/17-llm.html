@@ -1,0 +1,361 @@
+<div class="slide slide-llm" data-transition="fade" style="padding: 56px 72px 40px; overflow:hidden;">
+    <style>
+        .slide-llm .llm-inner {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+            gap: 28px;
+        }
+
+        .slide-llm .llm-header h1 {
+            font-size: 58px;
+            line-height: 1.1;
+            margin-bottom: 8px;
+            padding-top: 0;
+        }
+
+        .slide-llm .llm-header h2 {
+            font-family: var(--font-serif);
+            font-weight: 400;
+            color: var(--text-muted);
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .slide-llm .llm-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 40px;
+            flex: 1;
+            min-height: 0;
+            align-items: start;
+        }
+
+        /* Nature paper card */
+        .slide-llm .llm-paper {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.04);
+        }
+
+        .slide-llm .llm-paper-thumb {
+            position: relative;
+            overflow: hidden;
+            line-height: 0;
+        }
+
+        .slide-llm .llm-paper-thumb img {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+            object-position: top;
+            display: block;
+        }
+
+        .slide-llm .llm-paper-thumb::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: linear-gradient(to bottom, transparent, #fff);
+            pointer-events: none;
+        }
+
+        .slide-llm .llm-paper-info {
+            padding: 16px 20px;
+            background: white;
+            position: relative;
+            z-index: 10;
+        }
+
+        .slide-llm .llm-paper-title {
+            font-family: var(--font-sans);
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .slide-llm .llm-paper-sub {
+            font-family: var(--font-serif);
+            font-size: 15px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* Media card */
+        .slide-llm .llm-card {
+            background: #fff;
+            border: 1.5px solid #eaeaea;
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+        }
+
+        .slide-llm .llm-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 12px;
+        }
+
+        .slide-llm .llm-card-header span:first-child {
+            font-family: var(--font-sans);
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+        }
+
+        .slide-llm .llm-badge-tag {
+            background: #000;
+            color: #fff;
+            padding: 3px 12px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 700;
+            font-family: var(--font-sans);
+        }
+
+        /* Token demo */
+        .slide-llm .llm-tok-demo {
+            background: #fafafa;
+            border-radius: 10px;
+            padding: 16px;
+            border: 1px solid #f0f0f0;
+        }
+
+        .slide-llm .llm-tok-label {
+            font-family: var(--font-sans);
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+        }
+
+        .slide-llm .llm-tok-stream {
+            font-family: 'Space Mono', monospace;
+            font-size: 19px;
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 64px;
+        }
+
+        .slide-llm .llm-tok-stream .td {
+            color: var(--text-primary);
+        }
+
+        .slide-llm .llm-tok-stream .tc {
+            background: #1a1a1a;
+            color: #fff;
+            border-radius: 3px;
+            padding: 1px 4px;
+            animation: llmPulse 0.6s ease infinite alternate;
+        }
+
+        .slide-llm .llm-tok-stream .tg {
+            color: #bbb;
+        }
+
+        @keyframes llmPulse {
+            from {
+                opacity: 1
+            }
+
+            to {
+                opacity: 0.5
+            }
+        }
+
+        /* Prob bars */
+        .slide-llm .llm-probs {
+            margin-top: 12px;
+        }
+
+        .slide-llm .llm-prob-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 7px;
+        }
+
+        .slide-llm .llm-prob-word {
+            font-family: 'Space Mono', monospace;
+            font-size: 15px;
+            width: 160px;
+            color: var(--text-muted);
+            text-align: right;
+            flex-shrink: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .slide-llm .llm-bar-bg {
+            flex: 1;
+            height: 7px;
+            background: #eee;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .slide-llm .llm-bar-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        .slide-llm .llm-prob-pct {
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+            width: 44px;
+            text-align: right;
+            color: var(--text-primary);
+            flex-shrink: 0;
+        }
+    </style>
+
+    <div class="llm-inner">
+        <div class="llm-header">
+            <span class="label">The Hidden Architecture</span>
+            <h1>What LLMs Actually Are</h1>
+            <h3>Not a database. Not a physician. A probabilistic next-token predictor.</h3>
+        </div>
+
+        <div class="llm-grid">
+            <!-- LEFT: Nature paper -->
+            <div class="llm-paper">
+                <div class="llm-paper-thumb">
+                    <img src="assets/The Hallucination/Nature-article-screenshot.png"
+                        alt="Nature 2024 semantic entropy">
+                </div>
+                <div class="llm-paper-info">
+                    <div class="llm-paper-title">Farquhar et al., <em>Nature</em> 2024</div>
+                    <div class="llm-paper-sub">Detecting hallucinations in large language models using semantic entropy
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT: Token demo card -->
+            <div class="llm-card">
+                <div class="llm-card-header">
+                    <span>Token Prediction — Live</span>
+                    <span class="llm-badge-tag">LLM Internals</span>
+                </div>
+                <div class="llm-tok-demo">
+                    <div class="llm-tok-label">Next-token prediction</div>
+                    <div class="llm-tok-stream" id="llm-tok-stream">Loading…</div>
+                    <div class="llm-probs" id="llm-probs"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            const slideEl = document.currentScript.closest('.slide');
+            const DEMOS = [
+                {
+                    prompt: 'The most common cause of MI is',
+                    completions: [{
+                        word: 'atherosclerosis', probs: [
+                            { label: 'atherosclerosis', pct: 84, color: '#1a1a1a' },
+                            { label: 'thrombosis', pct: 9, color: '#6b7280' },
+                            { label: 'vasospasm', pct: 4, color: '#d1d5db' },
+                            { label: 'embolism', pct: 3, color: '#e5e7eb' },
+                        ]
+                    }]
+                },
+                {
+                    prompt: 'Drug interaction between metformin and',
+                    completions: [{
+                        word: 'alcohol', probs: [
+                            { label: 'alcohol', pct: 31, color: '#1a1a1a' },
+                            { label: 'contrast dye', pct: 28, color: '#6b7280' },
+                            { label: 'diuretics', pct: 22, color: '#d1d5db' },
+                            { label: 'quinolones', pct: 19, color: '#e5e7eb' },
+                        ]
+                    }]
+                },
+                {
+                    prompt: 'Published trial on drug X in 2023 shows',
+                    completions: [{
+                        word: 'fabricated result…', probs: [
+                            { label: 'significant benefit', pct: 38, color: '#ef4444' },
+                            { label: 'no effect', pct: 34, color: '#fca5a5' },
+                            { label: 'harm signal', pct: 28, color: '#fecaca' },
+                            { label: '(none real)', pct: 0, color: '#f3f4f6' },
+                        ]
+                    }]
+                }
+            ];
+
+            let di = 0, active = false;
+            const timeouts = [];
+
+            function later(fn, ms) { const t = setTimeout(fn, ms); timeouts.push(t); }
+            function clearAll() { timeouts.forEach(t => clearTimeout(t)); timeouts.length = 0; }
+
+            function renderProbs(probs) {
+                const el = document.getElementById('llm-probs');
+                if (!el) return;
+                el.innerHTML = probs.map(p =>
+                    `<div class="llm-prob-row">
+            <div class="llm-prob-word">${p.label}</div>
+            <div class="llm-bar-bg"><div class="llm-bar-fill" style="width:0%;background:${p.color}" data-t="${p.pct}"></div></div>
+            <div class="llm-prob-pct">${p.pct}%</div>
+          </div>`).join('');
+                requestAnimationFrame(() => el.querySelectorAll('.llm-bar-fill').forEach(b => b.style.width = b.dataset.t + '%'));
+            }
+
+            function clearProbs() { const el = document.getElementById('llm-probs'); if (el) el.innerHTML = ''; }
+
+            function typePrompt(charIdx) {
+                if (!active) return;
+                const d = DEMOS[di], full = d.prompt;
+                const st = document.getElementById('llm-tok-stream');
+                if (!st) return;
+                if (charIdx <= full.length) {
+                    st.innerHTML = `<span class="td">${full.slice(0, charIdx)}</span>` + (charIdx < full.length ? `<span class="tc">_</span>` : '');
+                    later(() => typePrompt(charIdx + 1), 45);
+                } else {
+                    later(() => {
+                        const comp = d.completions[0];
+                        renderProbs(comp.probs);
+                        st.innerHTML = `<span class="td">${full} </span><span class="tc">${comp.word}</span>`;
+                        later(() => {
+                            clearProbs();
+                            di = (di + 1) % DEMOS.length;
+                            if (st) st.innerHTML = '';
+                            later(() => typePrompt(0), 800);
+                        }, 3200);
+                    }, 400);
+                }
+            }
+
+            function start() {
+                if (active) return;
+                active = true; di = 0; clearProbs();
+                later(() => typePrompt(0), 600);
+            }
+
+            function stop() { active = false; clearAll(); clearProbs(); }
+
+            new MutationObserver(() => {
+                slideEl.classList.contains('active') ? start() : stop();
+            }).observe(slideEl, { attributes: true, attributeFilter: ['class'] });
+        })();
+    </script>
+</div>

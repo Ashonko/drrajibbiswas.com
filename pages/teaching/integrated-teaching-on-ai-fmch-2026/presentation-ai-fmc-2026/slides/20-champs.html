@@ -1,0 +1,109 @@
+<div class="slide slide-champs" data-transition="fade" style="padding: 0; overflow: hidden;">
+    <style>
+        /* Mirroring Hinton Layout (Flipped) */
+        .slide-champs .ch-layout {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            align-items: stretch;
+            gap: 0;
+        }
+
+        /* ── TEXT COLUMN (Left) ── */
+        .slide-champs .ch-text-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 60px 56px 60px 100px;
+            /* Wider left padding for balance */
+            position: relative;
+        }
+
+        .slide-champs .ch-logo-box {
+            max-width: 280px;
+            margin-bottom: 40px;
+        }
+
+        .slide-champs .ch-logo-box img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .slide-champs .ch-text-col h1 {
+            font-size: 58px;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            padding-top: 0;
+            font-weight: 800;
+        }
+
+        /* ── PHOTO COLUMN (Right, 44%) ── */
+        .slide-champs .ch-photo-col {
+            flex: 0 0 44%;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: stretch;
+            background: #000;
+        }
+
+        .slide-champs .ch-photo-fill {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            filter: contrast(1.05) brightness(0.95);
+            opacity: 0.9;
+            display: block;
+        }
+
+        /* Gradient feather on the LEFT inner edge */
+        .slide-champs .ch-photo-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 120px;
+            height: 100%;
+            background: linear-gradient(to left, transparent 0%, var(--bg-color) 100%);
+            pointer-events: none;
+        }
+
+        /* Caption strip */
+        .slide-champs .ch-photo-caption {
+            position: absolute;
+            bottom: 28px;
+            right: 32px;
+            font-family: var(--font-sans);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.7);
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+
+    <div class="ch-layout">
+        <!-- Left Column: Content -->
+        <div class="ch-text-col" style="margin-top: -40px;">
+            <span class="label">Local Case Study — Bangladesh</span>
+
+            <div class="ch-logo-box">
+                <img src="assets/CHAMPS/CHAMPS Logo.png" alt="CHAMPS Logo">
+            </div>
+            <p>
+                CHAMPS Bangladesh leverages artificial intelligence and language models to analyze clinical records and
+                verbal autopsies to identify the <b>causes of under-5 deaths</b> and <b>intrauterine fetal deaths</b>.
+            </p>
+        </div>
+
+        <!-- Right Column: Media -->
+        <div class="ch-photo-col">
+            <img class="ch-photo-fill" src="assets/CHAMPS/champs-bd.jpeg" alt="CHAMPS Bangladesh Field Work">
+            <div class="ch-photo-overlay"></div>
+            <div class="ch-photo-caption">CHAMPS Bangladesh — Surveillance Site</div>
+        </div>
+    </div>
+</div>

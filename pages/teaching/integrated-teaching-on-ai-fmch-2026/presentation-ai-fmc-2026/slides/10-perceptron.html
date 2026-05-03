@@ -1,0 +1,477 @@
+<div class="slide slide-perc" data-transition="fade">
+    <style>
+        .slide-perc {
+            padding: 60px 80px;
+        }
+
+        .slide-perc .perc-layout {
+            display: flex;
+            gap: 60px;
+            align-items: stretch;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* LEFT TEXT */
+        .slide-perc .perc-text {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 0;
+        }
+
+        .slide-perc .perc-text h1 {
+            font-size: 60px;
+            padding-top: 0;
+            margin-bottom: 8px;
+        }
+
+        .slide-perc .perc-text h3 {
+            margin-bottom: 24px;
+        }
+
+        .slide-perc .perc-text p {
+            font-size: 24px;
+            margin-bottom: 18px;
+        }
+
+        /* RIGHT MEDIA */
+        .slide-perc .perc-media {
+            flex: 1;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* PANEL A: Portraits */
+        .perc-history-panel {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            transition: opacity 0.5s ease;
+        }
+
+        .perc-history-panel.panel-hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .perc-portrait-row {
+            display: flex;
+            gap: 1.5rem;
+            width: 100%;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .perc-portrait-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            max-width: 420px;
+            transition: all 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .slide-perc:not(:has([data-step="2"].step-visible)) .perc-portrait-card:first-child {
+            max-width: 100%;
+        }
+
+        .slide-perc:not(:has([data-step="2"].step-visible)) .perc-photo-wrapper {
+            aspect-ratio: 16 / 9;
+        }
+
+        .perc-photo-wrapper {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+            border: 1px solid rgba(26, 26, 26, 0.06);
+            background: #f0eeeb;
+            margin-bottom: 1rem;
+            transition: all 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .perc-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top;
+            filter: grayscale(30%) contrast(1.05);
+            transition: filter 0.4s ease;
+        }
+
+        .perc-portrait-card:hover .perc-photo {
+            filter: grayscale(0%) contrast(1.05);
+        }
+
+        .perc-pname {
+            font-family: var(--font-sans);
+            font-size: 16px;
+            font-weight: 700;
+            text-align: center;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .perc-prole {
+            font-family: var(--font-serif);
+            font-size: 15px;
+            font-style: italic;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 2px;
+        }
+
+        /* PANEL B: Canvas */
+        .perc-viz-panel {
+            position: absolute;
+            inset: 0;
+            display: none;
+            flex-direction: column;
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(0.98);
+            pointer-events: none;
+            transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .perc-viz-panel.panel-active {
+            display: flex;
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1);
+            pointer-events: all;
+        }
+
+        .perc-viz-top {
+            flex-shrink: 0;
+            padding: 0 0 0.6rem 0;
+        }
+
+        .perc-ds-btns {
+            display: flex;
+            gap: 0.6rem;
+            margin-top: 0.5rem;
+        }
+
+        .perc-ds-btn {
+            flex: 1;
+            padding: 6px 10px;
+            border: 1.5px solid #d4d0c8;
+            border-radius: 6px;
+            background: #fafaf8;
+            font-family: var(--font-sans);
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            color: var(--text-primary);
+            transition: background 0.2s, border-color 0.2s;
+        }
+
+        .perc-ds-btn:hover {
+            background: #f0ede6;
+        }
+
+        .perc-ds-btn.ds-active {
+            background: var(--text-primary);
+            color: #fff;
+            border-color: var(--text-primary);
+        }
+
+        .perc-viz-box {
+            background: #f8f7f4;
+            border: 1.5px solid #e5e2dc;
+            border-radius: 14px;
+            padding: 16px 20px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            min-height: 0;
+            overflow: hidden;
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.04);
+        }
+
+        .perc-viz-title-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            flex-shrink: 0;
+        }
+
+        .perc-viz-box-title {
+            font-family: var(--font-sans);
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-primary);
+        }
+
+        #perc-dataset-label {
+            background: #22c55e;
+            color: #fff;
+            padding: 3px 12px;
+            border-radius: 10px;
+            font-family: var(--font-sans);
+            font-size: 14px;
+            font-weight: 700;
+            transition: background 0.4s ease;
+        }
+
+        #perc-canvas {
+            width: 100%;
+            flex: 1;
+            border-radius: 8px;
+            background: #ffffff;
+            border: 1px solid #ede9e2;
+            display: block;
+        }
+
+        .perc-status-bar {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 8px;
+            flex-shrink: 0;
+        }
+
+        .perc-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #10b981;
+            animation: perc-pulse 1.4s ease infinite;
+            flex-shrink: 0;
+        }
+
+        @keyframes perc-pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.5;
+                transform: scale(0.7);
+            }
+        }
+
+        #perc-status {
+            font-family: var(--font-sans);
+            font-size: 15px;
+            color: var(--text-muted);
+        }
+    </style>
+
+    <div class="perc-layout">
+        <div class="perc-text">
+            <span class="label">Part 03</span>
+            <h1>The Perceptron</h1>
+            <h3>1958 — Born Too Early</h3>
+
+            <p>
+                <strong>Frank Rosenblatt</strong> was a Cornell psychologist. In 1958, he built the <b>Mark I
+                    Perceptron</b> — a machine that could look at shapes through a camera and <i>learn</i> to
+                identify them. Not by rules. By <i>experience</i>.
+            </p>
+
+            <div data-step="1">
+                <p>
+                    In 1969, <b>Marvin Minsky</b> co-authored <i>Perceptrons</i>, proving that a
+                    single-layer perceptron could not solve <b>XOR</b> — a simple logical problem. The field
+                    concluded: neural networks are a dead end. Funding evaporated.
+                </p>
+            </div>
+
+            <!-- Invisible trigger for the Canvas animation -->
+            <div data-step="2" id="perc-step3-trigger"></div>
+        </div>
+
+        <div class="perc-media">
+            <!-- PANEL A: Portraits -->
+            <div class="perc-history-panel" id="perc-history-panel">
+                <div class="perc-portrait-row">
+                    <div class="perc-portrait-card">
+                        <div class="perc-photo-wrapper"><img src="assets/1958/frank rosenblatt.jpg"
+                                alt="Frank Rosenblatt" class="perc-photo"></div>
+                        <div class="perc-pname">Frank Rosenblatt</div>
+                        <div class="perc-prole">Cornell, 1958</div>
+                    </div>
+                    <div class="perc-portrait-card" data-step="1">
+                        <div class="perc-photo-wrapper"><img src="assets/1958/Marvin Minsky.jpg" alt="Marvin Minsky"
+                                class="perc-photo"></div>
+                        <div class="perc-pname">Marvin Minsky</div>
+                        <div class="perc-prole">MIT, 1969</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANEL B: Live Canvas -->
+            <div class="perc-viz-panel" id="perc-viz-panel">
+                <div class="perc-viz-top">
+                    <div class="perc-ds-btns">
+                        <button class="perc-ds-btn ds-active" id="perc-btn-or" onclick="percSwitch(0)">OR Gate</button>
+                        <button class="perc-ds-btn" id="perc-btn-and" onclick="percSwitch(1)">AND Gate</button>
+                        <button class="perc-ds-btn" id="perc-btn-xor" onclick="percSwitch(2)">XOR ⚡</button>
+                    </div>
+                </div>
+                <div class="perc-viz-box">
+                    <div class="perc-viz-title-row">
+                        <span class="perc-viz-box-title">Decision Boundary — Live Learning</span>
+                        <span id="perc-dataset-label">OR GATE</span>
+                    </div>
+                    <canvas id="perc-canvas"></canvas>
+                    <div class="perc-status-bar">
+                        <div class="perc-dot"></div>
+                        <span id="perc-status">Inputs → weighted sum → threshold → output class</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        (function () {
+            const STATES = [
+                { name: 'OR Gate', color: '#22c55e', points: [{ x: 1, y: 1, l: 1 }, { x: 1, y: -1, l: 1 }, { x: -1, y: 1, l: 1 }, { x: -1, y: -1, l: -1 }] },
+                { name: 'AND Gate', color: '#22c55e', points: [{ x: 1, y: 1, l: 1 }, { x: 1, y: -1, l: -1 }, { x: -1, y: 1, l: -1 }, { x: -1, y: -1, l: -1 }] },
+                { name: 'XOR Gate', color: '#ef4444', points: [{ x: 1, y: 1, l: -1 }, { x: 1, y: -1, l: 1 }, { x: -1, y: 1, l: 1 }, { x: -1, y: -1, l: -1 }] }
+            ];
+
+            let si = 0, pts = STATES[0].points;
+            let w1, w2, b, tw1, tw2, tb;
+            let frame = 0, solved = false, errPt = null, running = false;
+
+            function reset() {
+                w1 = tw1 = Math.random() * 2 - 1; w2 = tw2 = Math.random() * 2 - 1; b = tb = Math.random() * 2 - 1;
+                frame = 0; solved = false; errPt = null;
+                const vs = document.getElementById('perc-status');
+                if (vs) { vs.textContent = 'Learning… updating weights on errors.'; vs.style.color = ''; vs.style.fontWeight = ''; }
+            }
+
+            function updateBtns() {
+                ['perc-btn-or', 'perc-btn-and', 'perc-btn-xor'].forEach((id, i) => {
+                    const el = document.getElementById(id);
+                    if (el) el.classList.toggle('ds-active', i === si);
+                });
+            }
+
+            window.percSwitch = function (index) {
+                si = index; pts = STATES[si].points;
+                updateBtns();
+                const dl = document.getElementById('perc-dataset-label');
+                if (dl) { dl.textContent = STATES[si].name.toUpperCase(); dl.style.background = STATES[si].color; }
+                reset();
+            };
+
+            function resize() {
+                const c = document.getElementById('perc-canvas');
+                if (!c) return;
+                const dpr = window.devicePixelRatio || 1;
+                c.width = c.offsetWidth * dpr;
+                c.height = c.offsetHeight * dpr;
+            }
+
+            function mx(x, cw) { return (x + 2) / 4 * cw; }
+            function my(y, ch) { return (-y + 2) / 4 * ch; }
+
+            function draw() {
+                const c = document.getElementById('perc-canvas');
+                const vp = document.getElementById('perc-viz-panel');
+                if (!c || !vp || !vp.classList.contains('panel-active')) { running = false; return; }
+                requestAnimationFrame(draw);
+
+                w1 += (tw1 - w1) * 0.1; w2 += (tw2 - w2) * 0.1; b += (tb - b) * 0.1;
+
+                const dpr = window.devicePixelRatio || 1;
+                const cw = c.width / dpr, ch = c.height / dpr;
+                const ctx = c.getContext('2d');
+                ctx.save(); ctx.scale(dpr, dpr);
+                ctx.clearRect(0, 0, cw, ch);
+
+                ctx.strokeStyle = '#ede9e2'; ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(0, ch / 2); ctx.lineTo(cw, ch / 2);
+                ctx.moveTo(cw / 2, 0); ctx.lineTo(cw / 2, ch);
+                ctx.stroke();
+
+                if (Math.abs(w2) > 0.001) {
+                    const x1c = -2.5, x2c = 2.5;
+                    const y1c = -(w1 * x1c + b) / w2, y2c = -(w1 * x2c + b) / w2;
+                    ctx.strokeStyle = '#10b981'; ctx.lineWidth = 2.5;
+                    ctx.beginPath(); ctx.moveTo(mx(x1c, cw), my(y1c, ch)); ctx.lineTo(mx(x2c, cw), my(y2c, ch)); ctx.stroke();
+                    ctx.save(); ctx.beginPath();
+                    ctx.moveTo(mx(x1c, cw), my(y1c, ch)); ctx.lineTo(mx(x2c, cw), my(y2c, ch));
+                    if (w2 > 0) { ctx.lineTo(mx(x2c, cw), my(2.5, ch)); ctx.lineTo(mx(x1c, cw), my(2.5, ch)); }
+                    else { ctx.lineTo(mx(x2c, cw), my(-2.5, ch)); ctx.lineTo(mx(x1c, cw), my(-2.5, ch)); }
+                    ctx.closePath(); ctx.fillStyle = 'rgba(59,130,246,0.05)'; ctx.fill(); ctx.restore();
+                }
+
+                pts.forEach(p => {
+                    const cx = mx(p.x, cw), cy = my(p.y, ch);
+                    if (errPt === p) { ctx.beginPath(); ctx.arc(cx, cy, 16, 0, Math.PI * 2); ctx.fillStyle = 'rgba(251,191,36,0.4)'; ctx.fill(); }
+                    ctx.beginPath(); ctx.arc(cx, cy, 9, 0, Math.PI * 2);
+                    ctx.fillStyle = p.l === 1 ? '#3b82f6' : '#ef4444';
+                    ctx.fill(); ctx.lineWidth = 2; ctx.strokeStyle = '#fff'; ctx.stroke();
+                });
+                ctx.restore();
+
+                frame++;
+                if (frame % 50 === 0 && !(solved && si !== 2)) {
+                    let hasErr = false; errPt = null;
+                    const shuf = [...pts].sort(() => Math.random() - 0.5);
+                    for (let p of shuf) {
+                        const pred = Math.sign(tw1 * p.x + tw2 * p.y + tb) || -1;
+                        if (pred !== p.l) {
+                            hasErr = true; errPt = p;
+                            tw1 += p.l * p.x * 0.1; tw2 += p.l * p.y * 0.1; tb += p.l * 0.1;
+                            break;
+                        }
+                    }
+                    const vs = document.getElementById('perc-status');
+                    if (vs) {
+                        if (!hasErr) { solved = true; vs.textContent = '✓ Solved! Decision boundary found.'; vs.style.color = '#10b981'; vs.style.fontWeight = 'bold'; }
+                        else { vs.textContent = 'Learning… correcting misclassified points.'; vs.style.color = ''; vs.style.fontWeight = ''; }
+                    }
+                }
+            }
+
+            function syncPanels() {
+                const hist = document.getElementById('perc-history-panel');
+                const viz = document.getElementById('perc-viz-panel');
+                const trig = document.getElementById('perc-step3-trigger');
+                const on = trig && trig.classList.contains('step-visible');
+
+                if (on) {
+                    if (hist) hist.classList.add('panel-hidden');
+                    if (viz) viz.classList.add('panel-active');
+                    requestAnimationFrame(() => requestAnimationFrame(() => {
+                        running = false; updateBtns(); resize(); percSwitch(si); running = true; draw();
+                    }));
+                } else {
+                    if (hist) hist.classList.remove('panel-hidden');
+                    if (viz) viz.classList.remove('panel-active');
+                    running = false;
+                }
+            }
+
+            const trig = document.getElementById('perc-step3-trigger');
+            if (trig) new MutationObserver(syncPanels).observe(trig, { attributes: true, attributeFilter: ['class'] });
+
+            window.addEventListener('resize', () => { if (running) resize(); });
+        })();
+    </script>
+</div>

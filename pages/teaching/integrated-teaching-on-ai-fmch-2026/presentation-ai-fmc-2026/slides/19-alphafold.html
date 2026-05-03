@@ -1,0 +1,175 @@
+<div class="slide slide-alphafold" data-transition="fade" style="padding: 0; overflow: hidden;">
+    <style>
+        /* Mirroring Hinton Layout */
+        .slide-alphafold .af-layout {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            align-items: stretch;
+            gap: 0;
+        }
+
+        /* ── PHOTO COLUMN (Left, 44%) ── */
+        .slide-alphafold .af-photo-col {
+            flex: 0 0 44%;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: stretch;
+        }
+
+        .slide-alphafold .af-photo-fill {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            filter: grayscale(20%) contrast(1.05) brightness(0.95);
+            display: block;
+        }
+
+        /* Gradient feather on inner edge */
+        .slide-alphafold .af-photo-overlay {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100%;
+            background: linear-gradient(to right, transparent 0%, var(--bg-color) 100%);
+            pointer-events: none;
+        }
+
+        /* Caption strip */
+        .slide-alphafold .af-photo-caption {
+            position: absolute;
+            bottom: 28px;
+            left: 24px;
+            font-family: var(--font-sans);
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.72);
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.55);
+        }
+
+        /* ── TEXT COLUMN (Right) ── */
+        .slide-alphafold .af-text-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 60px 80px 60px 56px;
+            position: relative;
+        }
+
+        .slide-alphafold .af-text-col h1 {
+            font-size: 62px;
+            line-height: 1.05;
+            margin-bottom: 12px;
+            padding-top: 0;
+        }
+
+        .slide-alphafold .af-text-col h2 {
+            font-size: 32px;
+            margin-bottom: 36px;
+            color: var(--text-muted);
+            font-family: var(--font-serif);
+            font-weight: 400;
+            line-height: 1.4;
+        }
+
+        /* ── Floating Asset & Stats ── */
+        .slide-alphafold .af-content-row {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .slide-alphafold .af-stats {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .slide-alphafold .af-stat-item {
+            background: rgba(0, 0, 0, 0.03);
+            border-left: 4px solid var(--text-primary);
+            padding: 20px 24px;
+            border-radius: 4px;
+        }
+
+        .slide-alphafold .af-stat-val {
+            font-family: var(--font-sans);
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--text-primary);
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .slide-alphafold .af-stat-lbl {
+            font-family: var(--font-sans);
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+        }
+
+        /* The "Extracted" Protein Asset */
+        .slide-alphafold .af-protein-extract {
+            flex: 0 0 240px;
+            height: 240px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .slide-alphafold .af-protein-extract model-viewer {
+            width: 120%;
+            height: 120%;
+            display: block;
+            outline: none;
+            --poster-color: transparent;
+        }
+    </style>
+
+    <div class="af-layout">
+        <!-- Left Column: Media -->
+        <div class="af-photo-col">
+            <img class="af-photo-fill" src="assets/AlphaFold/Demis Hassabis.jpg" alt="Demis Hassabis">
+            <div class="af-photo-overlay"></div>
+            <div class="af-photo-caption">Demis Hassabis — CEO, Google DeepMind</div>
+        </div>
+
+        <!-- Right Column: Content -->
+        <div class="af-text-col">
+            <span class="label">Part 04 — The Triumph (2020)</span>
+            <h1>The 50-Year<br>Nightmare Solved</h1>
+            <h3>AlphaFold solved the protein folding problem — a grand challenge that baffled scientists for five
+                decades.</h3>
+
+            <div class="af-content-row">
+                <!-- Stats -->
+                <div class="af-stats">
+                    <div class="af-stat-item">
+                        <div class="af-stat-val">214 Million</div>
+                        <div class="af-stat-lbl">Protein structures predicted</div>
+                    </div>
+                    <div class="af-stat-item">
+                        <div class="af-stat-val">&lt; 1.0Å</div>
+                        <div class="af-stat-lbl">Median accuracy (Atomic level)</div>
+                    </div>
+                </div>
+
+                <!-- Extracted Asset -->
+                <div class="af-protein-extract">
+                    <model-viewer src="assets/AlphaFold/protein-structure.glb" alt="Protein and Nucleic Animation"
+                        auto-rotate camera-controls disable-zoom></model-viewer>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

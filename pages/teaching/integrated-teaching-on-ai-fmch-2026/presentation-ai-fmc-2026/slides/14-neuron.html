@@ -1,0 +1,492 @@
+<div class="slide slide-neuron" data-transition="fade">
+    <style>
+        .slide-neuron {
+            padding: 60px 80px;
+        }
+
+        .slide-neuron .an-layout {
+            display: flex;
+            gap: 60px;
+            align-items: stretch;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* LEFT */
+        .slide-neuron .an-text {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .slide-neuron .an-text h1 {
+            font-size: 56px;
+            padding-top: 0;
+            margin-bottom: 8px;
+        }
+
+        .slide-neuron .an-text h2 {
+            font-family: var(--font-serif);
+            font-weight: 500;
+            font-size: 26px;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+        }
+
+        /* Input cards */
+        .slide-neuron .an-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .slide-neuron .an-input-card {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: white;
+            padding: 16px 20px;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+        }
+
+        .slide-neuron .an-input-card.active {
+            border-color: var(--text-primary);
+            transform: translateX(8px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+        }
+
+        .slide-neuron .an-icon {
+            width: 64px;
+            height: 64px;
+            background: #f8f8f8;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .slide-neuron .an-icon img {
+            width: 56px;
+            height: 56px;
+            opacity: 0.7;
+        }
+
+        .slide-neuron .an-iname {
+            font-family: var(--font-sans);
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .slide-neuron .an-input-card.active .an-iname {
+            color: var(--text-primary);
+        }
+
+        .slide-neuron .an-iweight {
+            display: flex;
+            justify-content: space-between;
+            font-size: 16px;
+            font-weight: 700;
+            color: #999;
+            /* text-transform: uppercase; */
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .slide-neuron .an-wtrack {
+            height: 4px;
+            background: #eee;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .slide-neuron .an-wfill {
+            height: 100%;
+            border-radius: 2px;
+        }
+
+        /* RIGHT: viz container */
+        .slide-neuron .an-viz-wrap {
+            flex: 1;
+            position: relative;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 80%;
+            /* This controls the overall size */
+            margin-top: 140px;
+            /* This controls the position */
+        }
+
+        #an-three-container {
+            position: absolute;
+            /* Ensure it fills the wrap without affecting flex flow */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%; /* Essential for Three.js to be visible */
+        }
+
+
+        /* Step nav buttons */
+        .slide-neuron .an-step-nav {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            display: flex;
+            gap: 8px;
+            z-index: 20;
+        }
+
+        .slide-neuron .an-step-btn {
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            background: white;
+            color: var(--text-muted);
+            font-family: var(--font-sans);
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .slide-neuron .an-step-btn:hover {
+            border-color: rgba(0, 0, 0, 0.3);
+            color: var(--text-primary);
+        }
+
+        .slide-neuron .an-step-btn.active {
+            background: var(--text-primary);
+            border-color: var(--text-primary);
+            color: white;
+        }
+
+        /* Step description overlay */
+        .slide-neuron .an-step-desc {
+            position: absolute;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            font-family: var(--font-serif);
+            font-size: 18px;
+            line-height: 1.5;
+            color: var(--text-primary);
+            text-align: center;
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(12px);
+            padding: 14px 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            z-index: 20;
+            pointer-events: none;
+        }
+
+        .slide-neuron .an-step-desc span {
+            display: none;
+        }
+
+        .slide-neuron .an-step-desc span.an-visible {
+            display: block;
+            animation: anFadeIn 0.4s ease;
+        }
+
+        @keyframes anFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(6px);
+            }
+
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        /* Formula bar */
+        .slide-neuron .an-formula-bar {
+            position: absolute;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            z-index: 20;
+            pointer-events: none;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(8px);
+            padding: 10px 24px;
+            border-radius: 100px;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.07);
+            font-family: var(--font-mono);
+            font-size: 20px;
+            color: #aaa;
+        }
+
+        .slide-neuron .an-fp {
+            padding: 2px 8px;
+            border-radius: 4px;
+            transition: all 0.35s ease;
+        }
+
+        .slide-neuron .an-fp.hl {
+            color: var(--text-primary);
+            font-weight: 800;
+            background: rgba(0, 0, 0, 0.05);
+            transform: scale(1.1);
+        }
+
+        .slide-neuron .an-fsep {
+            color: #ddd;
+        }
+    </style>
+
+    <div class="an-layout" style="margin-top: -40px;">
+        <!-- LEFT: text + input cards -->
+        <div class="an-text">
+            <span class="label">Anatomy of an Intelligence</span>
+            <h1>The Artificial Neuron</h1>
+            <h3>How a stack of numbers mimics a brain</h3>
+
+            <div class="an-inputs">
+                <div class="an-input-card active" data-an-node="0">
+                    <div class="an-icon"><img src="assets/artificial-neurons/blood-pressure.svg" alt="BP"></div>
+                    <div style="flex:1">
+                        <div class="an-iname">Blood Pressure (180/120 mmHg)</div>
+                        <div class="an-iweight"><span>Weight</span><span> 0.8</span></div>
+                        <div class="an-wtrack">
+                            <div class="an-wfill" style="width:80%;background:#1a1a1a;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="an-input-card" data-an-node="1">
+                    <div class="an-icon"><img src="assets/artificial-neurons/cholesterol.svg" alt="Chol"></div>
+                    <div style="flex:1">
+                        <div class="an-iname">Cholesterol (High)</div>
+                        <div class="an-iweight"><span>Weight</span><span> 0.5</span></div>
+                        <div class="an-wtrack">
+                            <div class="an-wfill" style="width:50%;background:#666;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="an-input-card" data-an-node="2">
+                    <div class="an-icon"><img src="assets/artificial-neurons/age.svg" alt="Age"></div>
+                    <div style="flex:1">
+                        <div class="an-iname">Age (65 years)</div>
+                        <div class="an-iweight"><span>Weight</span><span> 0.2</span></div>
+                        <div class="an-wtrack">
+                            <div class="an-wfill" style="width:20%;background:#aaa;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT: Three.js viz -->
+        <div class="an-viz-wrap">
+            <div class="an-step-nav">
+                <button class="an-step-btn active" data-an-step="1">① Inputs</button>
+                <button class="an-step-btn" data-an-step="2">② Summation</button>
+                <button class="an-step-btn" data-an-step="3">③ Activation</button>
+                <button class="an-step-btn" data-an-step="4">④ Deep Learning</button>
+            </div>
+
+            <div id="an-three-container"></div>
+
+            <div class="an-formula-bar">
+                <span class="an-fp hl" id="an-f-sum">Σ(x·w)</span>
+                <span class="an-fsep">+</span>
+                <span class="an-fp" id="an-f-bias">b</span>
+                <span class="an-fsep">➔</span>
+                <span class="an-fp" id="an-f-act">f(z)</span>
+                <span class="an-fsep">➔</span>
+                <span class="an-fp" id="an-f-out">y</span>
+            </div>
+
+            <div class="an-step-desc">
+                <span class="an-visible" data-an-s="1"><strong>1. Weighted Inputs:</strong> Blood Pressure has a higher
+                    "weight" (importance) in this diagnostic context.</span>
+                <span data-an-s="2"><strong>2. Summation &amp; Bias:</strong> The neuron aggregates the signals. A
+                    baseline "Bias" shifts the total sum.</span>
+                <span data-an-s="3"><strong>3. Activation:</strong> If the evidence passes the threshold, the neuron
+                    "fires" a signal forward.</span>
+                <span data-an-s="4"><strong>4. Deep Learning:</strong> Hundreds of billions of neurons stacked together
+                    create the emergence of AI.</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            const slideEl = document.currentScript.closest('.slide');
+            let scene, camera, renderer, rafId = null;
+            let particles = [], connections = [], centralNode, outputNode, outputConnection, outputParticle;
+            let bgNodes = [];
+            let currentStep = 1;
+            const WEIGHTS = [0.8, 0.5, 0.2];
+
+            function initThree() {
+                const c = document.getElementById('an-three-container');
+                if (!c || !window.THREE || c.hasChildNodes()) return;
+                const W = c.clientWidth, H = c.clientHeight;
+
+                scene = new THREE.Scene();
+                scene.background = new THREE.Color(0xffffff);
+
+                camera = new THREE.PerspectiveCamera(45, W / H, 0.1, 100);
+                camera.position.set(0, 0, 12);
+
+                renderer = new THREE.WebGLRenderer({ antialias: true });
+                renderer.setSize(W, H);
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+                c.appendChild(renderer.domElement);
+
+                scene.add(new THREE.AmbientLight(0xffffff, 0.8));
+                const pl = new THREE.PointLight(0xffffff, 1.2);
+                pl.position.set(3, 6, 6); scene.add(pl);
+
+                const COLORS = [0x1a1a1a, 0x666666, 0xaaaaaa];
+                const inPos = [new THREE.Vector3(-5, 2.5, 0), new THREE.Vector3(-5, 0, 0), new THREE.Vector3(-5, -2.5, 0)];
+
+                centralNode = new THREE.Mesh(
+                    new THREE.SphereGeometry(1.6, 32, 32),
+                    new THREE.MeshStandardMaterial({ color: 0x333333, emissive: 0x333333, emissiveIntensity: 0.1, transparent: true, opacity: 0.95 })
+                );
+                scene.add(centralNode);
+                centralNode.add(new THREE.Mesh(
+                    new THREE.SphereGeometry(0.6, 16, 16),
+                    new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.4 })
+                ));
+
+                outputNode = new THREE.Mesh(
+                    new THREE.SphereGeometry(0.7, 32, 32),
+                    new THREE.MeshStandardMaterial({ color: 0x1a1a1a, emissive: 0x1a1a1a, emissiveIntensity: 0.1 })
+                );
+                outputNode.position.set(5, 0, 0); scene.add(outputNode);
+
+                inPos.forEach((pos, i) => {
+                    const m = new THREE.Mesh(new THREE.SphereGeometry(0.5, 32, 32), new THREE.MeshStandardMaterial({ color: COLORS[i], emissive: COLORS[i], emissiveIntensity: 0.2 }));
+                    m.position.copy(pos); scene.add(m);
+
+                    const line = new THREE.Line(
+                        new THREE.BufferGeometry().setFromPoints([pos, centralNode.position]),
+                        new THREE.LineBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.15 + WEIGHTS[i] * 0.25 })
+                    );
+                    scene.add(line); connections.push(line);
+
+                    for (let j = 0; j < 4; j++) {
+                        const p = new THREE.Mesh(new THREE.SphereGeometry(0.12, 8, 8), new THREE.MeshBasicMaterial({ color: COLORS[i] }));
+                        scene.add(p);
+                        particles.push({ mesh: p, start: pos.clone(), end: centralNode.position.clone(), progress: Math.random(), speed: 0.008 * (WEIGHTS[i] * 2 + 0.5) });
+                    }
+                });
+
+                outputConnection = new THREE.Line(
+                    new THREE.BufferGeometry().setFromPoints([centralNode.position, outputNode.position]),
+                    new THREE.LineBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.05 })
+                );
+                scene.add(outputConnection);
+
+                const opMesh = new THREE.Mesh(new THREE.SphereGeometry(0.18, 8, 8), new THREE.MeshBasicMaterial({ color: 0x000000 }));
+                opMesh.visible = false; scene.add(opMesh);
+                outputParticle = { mesh: opMesh, start: centralNode.position.clone(), end: outputNode.position.clone(), progress: 0, speed: 0.03 };
+
+                const bgPalette = [0x3b82f6, 0x10b981, 0xf59e0b, 0x8b5cf6, 0xef4444, 0xec4899];
+                for (let i = 0; i < 25; i++) {
+                    const col = bgPalette[Math.floor(Math.random() * bgPalette.length)];
+                    const bg = new THREE.Mesh(new THREE.SphereGeometry(Math.random() * 0.4 + 0.2, 16, 16), new THREE.MeshStandardMaterial({ color: col, emissive: col, emissiveIntensity: 0.2, transparent: true, opacity: 0 }));
+                    bg.position.set((Math.random() - 0.5) * 20, (Math.random() - 0.5) * 15, -5 - Math.random() * 8);
+                    scene.add(bg); bgNodes.push(bg);
+                }
+            }
+
+            function loop() {
+                if (!renderer) { rafId = null; return; }
+                rafId = requestAnimationFrame(loop);
+                const t = Date.now() * 0.001;
+
+                camera.position.y = Math.sin(t * 0.4) * 0.3;
+                camera.position.x = Math.cos(t * 0.2) * 0.3;
+                camera.lookAt(0, 0, 0);
+
+                if (centralNode) {
+                    centralNode.material.emissiveIntensity = (currentStep === 2 ? 0.3 : 0.1) + Math.sin(t * 2) * 0.05;
+                    centralNode.rotation.y += 0.005;
+                }
+
+                particles.forEach(p => {
+                    p.progress += p.speed;
+                    if (p.progress >= 1) p.progress = 0;
+                    p.mesh.position.lerpVectors(p.start, p.end, p.progress);
+                    p.mesh.material.opacity = Math.sin(p.progress * Math.PI);
+                });
+
+                if (currentStep >= 3) {
+                    outputConnection.material.opacity = 0.2;
+                    outputParticle.mesh.visible = true;
+                    outputParticle.progress += outputParticle.speed;
+                    if (outputParticle.progress >= 1) outputParticle.progress = 0;
+                    outputParticle.mesh.position.lerpVectors(outputParticle.start, outputParticle.end, outputParticle.progress);
+                    outputNode.material.emissiveIntensity = 0.4 + Math.sin(t * 4) * 0.2;
+                } else {
+                    outputConnection.material.opacity = 0.05;
+                    outputParticle.mesh.visible = false;
+                    outputNode.material.emissiveIntensity = 0.1;
+                }
+
+                bgNodes.forEach((n, i) => {
+                    n.material.opacity = currentStep === 4 ? Math.min(0.25, n.material.opacity + 0.005) : Math.max(0, n.material.opacity - 0.05);
+                    if (currentStep === 4) n.position.y += Math.sin(t + i) * 0.007;
+                });
+
+                renderer.render(scene, camera);
+            }
+
+            function setStep(s) {
+                currentStep = s;
+                slideEl.querySelectorAll('.an-step-desc span').forEach(el => el.classList.toggle('an-visible', parseInt(el.dataset.anS) === s));
+                slideEl.querySelectorAll('.an-step-btn').forEach(btn => btn.classList.toggle('active', parseInt(btn.dataset.anStep) === s));
+                slideEl.querySelector('#an-f-sum').className = 'an-fp' + (s <= 2 ? ' hl' : '');
+                slideEl.querySelector('#an-f-bias').className = 'an-fp' + (s === 2 ? ' hl' : '');
+                slideEl.querySelector('#an-f-act').className = 'an-fp' + (s === 3 ? ' hl' : '');
+                slideEl.querySelector('#an-f-out').className = 'an-fp' + (s >= 3 ? ' hl' : '');
+                slideEl.querySelectorAll('.an-input-card').forEach(c => c.classList.toggle('active', s === 1));
+            }
+
+            function startAnim() { if (rafId) return; initThree(); setStep(1); loop(); }
+            function stopAnim() { if (rafId) { cancelAnimationFrame(rafId); rafId = null; } }
+
+            // ── Custom Hooks for main.js ──
+            slideEl.customNext = () => { if (currentStep < 4) { setStep(currentStep + 1); return true; } return false; };
+            slideEl.customPrev = () => { if (currentStep > 1) { setStep(currentStep - 1); return true; } return false; };
+
+            slideEl.querySelectorAll('.an-step-btn').forEach(btn => btn.addEventListener('click', e => { e.stopPropagation(); setStep(parseInt(btn.dataset.anStep)); }));
+
+            new MutationObserver(() => slideEl.classList.contains('active') ? startAnim() : stopAnim()).observe(slideEl, { attributes: true, attributeFilter: ['class'] });
+
+            window.addEventListener('resize', () => {
+                const c = document.getElementById('an-three-container');
+                if (!c || !camera || !renderer) return;
+                camera.aspect = c.clientWidth / c.clientHeight; camera.updateProjectionMatrix();
+                renderer.setSize(c.clientWidth, c.clientHeight);
+            });
+        })();
+    </script>
+</div>

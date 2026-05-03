@@ -1,0 +1,105 @@
+<div class="slide center" data-transition="wipe">
+    <style>
+        /* Scoped strictly to the AI Quiz grid */
+        .ai-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .ai-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .ai-icon {
+            object-fit: contain;
+        }
+
+        .ai-icon--90 {
+            width: 90px;
+            height: 90px;
+        }
+
+        .ai-icon--100 {
+            width: 100px;
+            height: 100px;
+        }
+
+        .ai-icon--110 {
+            width: 110px;
+            height: 110px;
+        }
+
+        .ai-icon--140 {
+            width: 140px;
+            height: 140px;
+        }
+
+        .ai-name {
+            font-family: var(--font-sans);
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-align: center;
+        }
+    </style>
+
+    <span class="label">Quick Test</span>
+    <h2>How many of these AI tools can you recognize?</h2>
+    <div class="divider" style="margin:0 auto 28px;"></div>
+
+    <div class="ai-grid">
+        <div class="ai-item">
+            <img src="assets/chatgpt.svg" alt="ChatGPT" class="ai-icon ai-icon--100" data-step="1">
+            <div class="ai-name" data-step="8">ChatGPT</div>
+        </div>
+        <div class="ai-item">
+            <img src="assets/gemini.png" alt="Gemini" class="ai-icon ai-icon--100" data-step="2">
+            <div class="ai-name" data-step="8">Gemini</div>
+        </div>
+        <div class="ai-item">
+            <img src="assets/deepseek.png" alt="DeepSeek" class="ai-icon ai-icon--140" data-step="3">
+            <div class="ai-name" data-step="8">DeepSeek</div>
+        </div>
+        <div class="ai-item">
+            <img src="assets/claude.svg" alt="Claude" class="ai-icon ai-icon--100" data-step="4">
+            <div class="ai-name" data-step="8">Claude</div>
+        </div>
+        <div class="ai-item">
+            <img src="assets/grok.png" alt="Grok" class="ai-icon ai-icon--90" data-step="5">
+            <div class="ai-name" data-step="8">Grok</div>
+        </div>
+        <div class="ai-item">
+            <img src="assets/notebooklm.webp" alt="NotebookLM" class="ai-icon ai-icon--100" data-step="6">
+            <div class="ai-name" data-step="8">NotebookLM</div>
+        </div>
+        <div class="flex-break"></div>
+        <div class="ai-item">
+            <img src="assets/aistudio.webp" alt="AI Studio" class="ai-icon ai-icon--90" data-step="7">
+            <div class="ai-name" data-step="8">AI Studio</div>
+        </div>
+        <div class="ai-item">
+            <img src="assets/perplexity.avif" alt="Perplexity" class="ai-icon ai-icon--90" data-step="7">
+            <div class="ai-name" data-step="8">Perplexity</div>
+        </div>
+        <div class="ai-item">
+            <img src="assets/Midjourney.svg" alt="Midjourney" class="ai-icon ai-icon--140" data-step="7">
+            <div class="ai-name" data-step="8">Midjourney</div>
+        </div>
+        <div class="ai-item">
+            <img src="assets/Mistral.png" alt="Mistral" class="ai-icon ai-icon--100" data-step="7">
+            <div class="ai-name" data-step="8">Mistral</div>
+        </div>
+        <div class="ai-item">
+            <img src="assets/Qwen.png" alt="Qwen" class="ai-icon ai-icon--110" data-step="7">
+            <div class="ai-name" data-step="8">Qwen</div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+<div class="slide" data-transition="wipe">
+    <div class="cols-2">
+        <div class="col card">
+            <span class="label">Part 01</span>
+            <h1>The Long Dream</h1>
+            <h3>17th Century — The origin of mechanical reason</h3>
+
+            <p style="font-size: 24px;"><b>Gottfried Wilhelm Leibniz</b> believed deeply that human thought was
+                fundamentally computational.</p>
+
+            <p style="font-size: 24px;">If you could break human arguments down into basic symbols — a universal logical
+                language — you could systematically calculate your way to truth. He called this the <b>Calculus
+                    Ratiocinator</b>.</p>
+
+            <!-- Three.js Animation Container -->
+            <div id="anim-leibniz" class="animation-container">
+                <script type="text/x-threejs">
+          scene.background = new THREE.Color(0xF4F3EE);
+
+          // Outer icosahedron wireframe
+          const icoGeo  = new THREE.IcosahedronGeometry(1.2, 1);
+          const icoWire = new THREE.WireframeGeometry(icoGeo);
+          const icoMat  = new THREE.LineBasicMaterial({ color: 0x1A1A1A, transparent: true, opacity: 0.28 });
+          const ico     = new THREE.LineSegments(icoWire, icoMat);
+          scene.add(ico);
+
+          // Inner spinning octahedron
+          const coreGeo = new THREE.OctahedronGeometry(0.4, 0);
+          const coreMat = new THREE.MeshBasicMaterial({ color: 0x1A1A1A, wireframe: true, transparent: true, opacity: 0.8 });
+          const core    = new THREE.Mesh(coreGeo, coreMat);
+          scene.add(core);
+
+          return {
+            animate(t) {
+              ico.rotation.x  += 0.001;
+              ico.rotation.y  += 0.002;
+              core.rotation.x -= 0.003;
+              core.rotation.y -= 0.004;
+              core.rotation.z += 0.002;
+            },
+            dispose() {
+              icoGeo.dispose(); icoWire.dispose(); icoMat.dispose();
+              coreGeo.dispose(); coreMat.dispose();
+            }
+          };
+        </script>
+            </div>
+        </div>
+
+        <div class="col card center">
+            <img class="image-people" src="assets/Gottfried Wilhelm Leibniz.jpg" alt="Gottfried Wilhelm Leibniz">
+        </div>
+    </div>
+</div>

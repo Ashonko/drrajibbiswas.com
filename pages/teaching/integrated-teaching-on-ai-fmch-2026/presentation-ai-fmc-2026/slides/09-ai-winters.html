@@ -1,0 +1,260 @@
+<div class="slide slide-ai-winter" data-transition="fade"
+    style="background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%); padding: 0; overflow: hidden;">
+    <style>
+        /* ── AI Winters slide styles ── */
+        .slide-ai-winter .snow-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .slide-ai-winter .snowflake {
+            position: absolute;
+            top: -20px;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 1em;
+            text-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+            animation: aw-fall linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes aw-fall {
+            0% {
+                transform: translateY(-20px) rotate(0deg);
+            }
+
+            100% {
+                transform: translateY(920px) rotate(360deg);
+            }
+        }
+
+        .slide-ai-winter .winter-content {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 120px;
+        }
+
+        .slide-ai-winter .winter-badge {
+            color: #94a3b8;
+            border-bottom: 2px solid #3b82f6;
+            display: inline-block;
+            padding-bottom: 4px;
+            margin-bottom: 20px;
+            font-size: 18px;
+            letter-spacing: 3px;
+            font-family: var(--font-sans);
+            text-transform: uppercase;
+            font-weight: 600;
+            width: fit-content;
+        }
+
+        .slide-ai-winter .winter-h1 {
+            color: #ffffff !important;
+            font-size: 72px;
+            margin-bottom: 8px;
+            font-family: var(--font-sans);
+            font-weight: 800;
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            padding-top: 0;
+        }
+
+        .slide-ai-winter .winter-h2 {
+            color: #94a3b8 !important;
+            font-size: 32px;
+            margin-bottom: 50px;
+            font-family: var(--font-serif);
+            font-weight: 400;
+        }
+
+        /* ── Horizontal Timeline ── */
+        .slide-ai-winter .winter-timeline {
+            position: relative;
+            width: 100%;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .slide-ai-winter .timeline-line-bg {
+            position: absolute;
+            top: 11px;
+            left: 9%;
+            right: 9%;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.15);
+            z-index: 1;
+        }
+
+        .slide-ai-winter .timeline-steps {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .slide-ai-winter .timeline-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 18%;
+            text-align: center;
+            position: relative;
+        }
+
+        .slide-ai-winter .timeline-marker {
+            width: 18px;
+            height: 18px;
+            background: #0f172a;
+            border: 3px solid #3b82f6;
+            border-radius: 50%;
+            box-shadow: 0 0 12px rgba(59, 130, 246, 0.6);
+            flex-shrink: 0;
+        }
+
+        .slide-ai-winter .timeline-year {
+            font-family: var(--font-sans);
+            font-size: 20px;
+            font-weight: 700;
+            color: #f8fafc;
+            margin-top: 24px;
+            margin-bottom: 14px;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 5px 16px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .slide-ai-winter .timeline-info {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            padding: 18px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            width: 100%;
+        }
+
+        .slide-ai-winter .timeline-info strong {
+            font-family: var(--font-sans);
+            font-size: 26px;
+            color: var(--text-primary);
+            display: block;
+            margin-bottom: 10px;
+            line-height: 1.3;
+            font-weight: 700;
+        }
+
+        .slide-ai-winter .timeline-info p {
+            font-family: var(--font-serif);
+            font-size: 24px;
+            color: var(--text-primary);
+            line-height: 1.5;
+            margin: 0 !important;
+        }
+
+        /* Green "end" marker */
+        .slide-ai-winter .marker-green {
+            border-color: #34d399 !important;
+            box-shadow: 0 0 12px rgba(52, 211, 153, 0.6) !important;
+        }
+
+        .slide-ai-winter .year-green {
+            color: #cbd5e1 !important;
+        }
+
+        .slide-ai-winter .info-green strong {
+            color: #195e28 !important;
+        }
+    </style>
+
+    <!-- Falling snow -->
+    <div class="snow-bg" id="aw-snow"></div>
+    <script>
+        (function () {
+            const container = document.getElementById('aw-snow');
+            if (!container) return;
+            const flakes = ['❄', '❅', '❆'];
+            for (let i = 0; i < 28; i++) {
+                const s = document.createElement('span');
+                s.className = 'snowflake';
+                s.textContent = flakes[i % flakes.length];
+                s.style.left = (Math.random() * 100) + '%';
+                s.style.fontSize = (0.7 + Math.random() * 0.9) + 'em';
+                s.style.animationDuration = (6 + Math.random() * 10) + 's';
+                s.style.animationDelay = (Math.random() * -12) + 's';
+                s.style.opacity = 0.4 + Math.random() * 0.5;
+                container.appendChild(s);
+            }
+        })();
+    </script>
+
+    <div class="winter-content" style="margin-top: -100px;">
+        <div class="winter-badge">1974–1993</div>
+        <h1 class="winter-h1">The AI Winters</h1>
+        <h2 class="winter-h2">When the dream went into hibernation</h2>
+
+        <!-- Horizontal Timeline -->
+        <div class="winter-timeline">
+            <div class="timeline-line-bg"></div>
+            <div class="timeline-steps">
+                <!-- Event 1 -->
+                <div class="timeline-step">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-year">1974</div>
+                    <div class="timeline-info">
+                        <strong>Lighthill Report</strong>
+                        <p>UK review concludes AI has failed. Funding evaporates, labs close globally.</p>
+                    </div>
+                </div>
+                <!-- Event 2 -->
+                <div class="timeline-step">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-year">1975–80</div>
+                    <div class="timeline-info">
+                        <strong>First Winter</strong>
+                        <p>The early "AI bubble" bursts. Academic research slows to a mere trickle.</p>
+                    </div>
+                </div>
+                <!-- Event 3 -->
+                <div class="timeline-step">
+                    <div class="timeline-marker"
+                        style="border-color:#94a3b8; box-shadow:0 0 12px rgba(148,163,184,0.5);"></div>
+                    <div class="timeline-year" style="color:#cbd5e1;">1980s</div>
+                    <div class="timeline-info">
+                        <strong style="color: #195e28;">Expert Systems</strong>
+                        <p>Brief recovery. MYCIN-style systems attempt commercialization in enterprise.</p>
+                    </div>
+                </div>
+                <!-- Event 4 -->
+                <div class="timeline-step">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-year">1987</div>
+                    <div class="timeline-info">
+                        <strong>Expert Systems Collapse</strong>
+                        <p>Maintaining complex rules is too expensive. Businesses walk away again.</p>
+                    </div>
+                </div>
+                <!-- Event 5 -->
+                <div class="timeline-step">
+                    <div class="timeline-marker marker-green"></div>
+                    <div class="timeline-year">1993</div>
+                    <div class="timeline-info info-green">
+                        <strong>Winter Ends</strong>
+                        <p>Computing power increases. A major shift toward statistical machine learning begins.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
