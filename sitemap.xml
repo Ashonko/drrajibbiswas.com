@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+  <!-- ═══════════════════════════════════════ -->
+  <!--  Homepage                               -->
+  <!-- ═══════════════════════════════════════ -->
+  <url>
+    <loc>https://drrajibbiswas.com/</loc>
+    <lastmod>2025-11-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!--  Core Profile Pages                     -->
+  <!-- ═══════════════════════════════════════ -->
+  <url>
+    <loc>https://drrajibbiswas.com/pages/profile/</loc>
+    <lastmod>2024-11-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://drrajibbiswas.com/pages/cv/</loc>
+    <lastmod>2025-03-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://drrajibbiswas.com/pages/contact/</loc>
+    <lastmod>2024-11-24</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!--  Academic & Research                    -->
+  <!-- ═══════════════════════════════════════ -->
+  <url>
+    <loc>https://drrajibbiswas.com/pages/publications/</loc>
+    <lastmod>2026-07-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://drrajibbiswas.com/pages/research/</loc>
+    <lastmod>2025-08-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://drrajibbiswas.com/pages/education/</loc>
+    <lastmod>2025-03-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://drrajibbiswas.com/pages/work-experience/</loc>
+    <lastmod>2025-06-14</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!--  Teaching                               -->
+  <!-- ═══════════════════════════════════════ -->
+  <url>
+    <loc>https://drrajibbiswas.com/pages/teaching/</loc>
+    <lastmod>2026-05-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://drrajibbiswas.com/pages/teaching/integrated-teaching-on-ai-fmch-2026/</loc>
+    <lastmod>2026-05-04</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://drrajibbiswas.com/pages/teaching/integrated-teaching-on-ai-fmch-2026/presentation-ai-fmc-2026/</loc>
+    <lastmod>2026-05-03</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!--  Conferences                            -->
+  <!-- ═══════════════════════════════════════ -->
+  <url>
+    <loc>https://drrajibbiswas.com/pages/conferences/</loc>
+    <lastmod>2025-11-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://drrajibbiswas.com/pages/conferences/astmh2025/</loc>
+    <lastmod>2025-11-21</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://drrajibbiswas.com/pages/conferences/astmh2023/</loc>
+    <lastmod>2025-06-14</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://drrajibbiswas.com/pages/conferences/isa2024/</loc>
+    <lastmod>2025-06-14</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!--  Training & Workshops                   -->
+  <!-- ═══════════════════════════════════════ -->
+  <url>
+    <loc>https://drrajibbiswas.com/pages/training-courses/</loc>
+    <lastmod>2026-04-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://drrajibbiswas.com/pages/workshops/champs-writing-workshop-kenya-2024/</loc>
+    <lastmod>2024-11-24</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!--  Awards & Recognition                   -->
+  <!-- ═══════════════════════════════════════ -->
+  <url>
+    <loc>https://drrajibbiswas.com/pages/awards/</loc>
+    <lastmod>2025-06-14</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!--  Leadership & Management                -->
+  <!-- ═══════════════════════════════════════ -->
+  <url>
+    <loc>https://drrajibbiswas.com/pages/leadership/</loc>
+    <lastmod>2024-11-24</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://drrajibbiswas.com/pages/management/</loc>
+    <lastmod>2024-12-17</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://drrajibbiswas.com/pages/memberships/</loc>
+    <lastmod>2025-01-03</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!--  Software Development                   -->
+  <!-- ═══════════════════════════════════════ -->
+  <url>
+    <loc>https://drrajibbiswas.com/pages/software-development/</loc>
+    <lastmod>2025-08-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://drrajibbiswas.com/pages/software-development/roster-manager-for-the-intern-doctors/</loc>
+    <lastmod>2025-08-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://drrajibbiswas.com/pages/software-development/excel-to-markdown-converter/</loc>
+    <lastmod>2025-08-31</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://drrajibbiswas.com/pages/software-development/practice-spelling-for-ielts/</loc>
+    <lastmod>2025-08-31</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!--  Skills                                 -->
+  <!-- ═══════════════════════════════════════ -->
+  <url>
+    <loc>https://drrajibbiswas.com/pages/language/</loc>
+    <lastmod>2024-11-24</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://drrajibbiswas.com/pages/office-software-skills/</loc>
+    <lastmod>2024-11-24</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!--  Innovation                             -->
+  <!-- ═══════════════════════════════════════ -->
+  <url>
+    <loc>https://drrajibbiswas.com/pages/innovation/ims-2024/</loc>
+    <lastmod>2024-11-24</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!--  Co-curricular Activities               -->
+  <!-- ═══════════════════════════════════════ -->
+  <url>
+    <loc>https://drrajibbiswas.com/pages/cocurricular/astronomy/</loc>
+    <lastmod>2025-01-03</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://drrajibbiswas.com/pages/cocurricular/painting/</loc>
+    <lastmod>2026-07-28</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://drrajibbiswas.com/pages/cocurricular/photography/</loc>
+    <lastmod>2025-07-12</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://drrajibbiswas.com/pages/cocurricular/a-readers-journey/</loc>
+    <lastmod>2025-08-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!--  Photography Gallery                    -->
+  <!-- ═══════════════════════════════════════ -->
+  <url>
+    <loc>https://drrajibbiswas.com/photography/</loc>
+    <lastmod>2025-07-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+</urlset>
