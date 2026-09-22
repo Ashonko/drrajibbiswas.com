@@ -1,0 +1,995 @@
+<!-- AI tool picker — included from resources/ai/index.html -->
+<button type="button" class="ai-picker-fab" id="ai-tool-picker-open" aria-haspopup="dialog"
+    aria-label="Find the right AI tool" title="Find the right AI tool">
+    <svg class="ai-picker-fab-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="10"></circle>
+        <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+    </svg>
+    <span class="ai-picker-fab-text">Find tool</span>
+</button>
+
+<div class="ai-picker-backdrop" id="ai-tool-picker-backdrop" hidden aria-hidden="true"></div>
+<div class="ai-picker-modal" id="ai-tool-picker-modal" role="dialog" aria-modal="true" aria-labelledby="ai-picker-title" hidden>
+    <div class="ai-picker-panel">
+        <header class="ai-picker-header">
+            <div>
+                <h2 class="ai-picker-title" id="ai-picker-title">Which tool fits your task?</h2>
+                <p class="ai-picker-sub" id="ai-picker-sub">Answer a few questions — we suggest tools from this page.</p>
+            </div>
+            <button type="button" class="ai-picker-close" id="ai-tool-picker-close" aria-label="Close">&times;</button>
+        </header>
+        <div class="ai-picker-progress" id="ai-picker-progress" aria-hidden="true">
+            <div class="ai-picker-progress-bar" id="ai-picker-progress-bar"></div>
+        </div>
+        <div class="ai-picker-body" id="ai-picker-body"></div>
+        <footer class="ai-picker-footer">
+            <button type="button" class="btn btn-outline-secondary btn-sm" id="ai-picker-back" disabled>Back</button>
+            <button type="button" class="btn btn-link btn-sm" id="ai-picker-restart">Start over</button>
+        </footer>
+        <p class="ai-picker-privacy">Never paste patient identifiers or EMR data into public tools.</p>
+    </div>
+</div>
+
+<style>
+    .ai-picker-fab {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        z-index: 1030;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        min-height: 56px;
+        padding: 0 20px 0 16px;
+        border: none;
+        border-radius: 999px;
+        background: #212529;
+        color: #fff;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.22);
+        transition: background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .ai-picker-fab:hover,
+    .ai-picker-fab:focus-visible {
+        background: #000;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.28);
+        outline: 2px solid #fff;
+        outline-offset: 2px;
+    }
+
+    .ai-picker-fab:active {
+        transform: translateY(0);
+    }
+
+    .ai-picker-fab-icon {
+        flex-shrink: 0;
+    }
+
+    .ai-picker-fab-text {
+        white-space: nowrap;
+    }
+
+    @media (max-width: 480px) {
+        .ai-picker-fab {
+            bottom: 16px;
+            right: 16px;
+            padding: 0;
+            width: 56px;
+            height: 56px;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .ai-picker-fab-text {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+    }
+
+    .ai-picker-backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.45);
+        z-index: 1040;
+    }
+
+    .ai-picker-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 1050;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
+        pointer-events: none;
+    }
+
+    .ai-picker-modal:not([hidden]) {
+        pointer-events: auto;
+    }
+
+    .ai-picker-panel {
+        background: #fff;
+        border: 1px solid #cfd4da;
+        border-radius: 8px;
+        width: 100%;
+        max-width: 560px;
+        max-height: min(90vh, 720px);
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+    }
+
+    .ai-picker-header {
+        display: flex;
+        gap: 12px;
+        padding: 20px 20px 12px;
+        border-bottom: 1px solid #e8eaed;
+    }
+
+    .ai-picker-title {
+        font-size: 1.25rem;
+        margin: 0 0 4px;
+        line-height: 1.3;
+    }
+
+    .ai-picker-sub {
+        margin: 0;
+        font-size: 14px;
+        color: #555;
+    }
+
+    .ai-picker-close {
+        border: none;
+        background: transparent;
+        font-size: 28px;
+        line-height: 1;
+        padding: 0 4px;
+        color: #444;
+        cursor: pointer;
+        margin-left: auto;
+        flex-shrink: 0;
+    }
+
+    .ai-picker-close:hover {
+        color: #000;
+    }
+
+    .ai-picker-progress {
+        height: 4px;
+        background: #e8eaed;
+        margin: 0 20px;
+        border-radius: 2px;
+        overflow: hidden;
+    }
+
+    .ai-picker-progress-bar {
+        height: 100%;
+        width: 0%;
+        background: dimgray;
+        transition: width 0.25s ease;
+    }
+
+    .ai-picker-body {
+        padding: 20px;
+        overflow-y: auto;
+        flex: 1;
+    }
+
+    .ai-picker-question {
+        font-size: 1.05rem;
+        font-weight: 600;
+        margin: 0 0 16px;
+    }
+
+    .ai-picker-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .ai-picker-pill {
+        border: 1px solid #6c757d;
+        background: #f8f9fa;
+        color: #212529;
+        border-radius: 999px;
+        padding: 10px 16px;
+        font-size: 15px;
+        cursor: pointer;
+        text-align: left;
+        transition: background 0.15s, border-color 0.15s, transform 0.1s;
+    }
+
+    .ai-picker-pill:hover,
+    .ai-picker-pill:focus-visible {
+        background: #212529;
+        border-color: #212529;
+        color: #fff;
+        outline: none;
+    }
+
+    .ai-picker-pill:active {
+        transform: scale(0.98);
+    }
+
+    .ai-picker-result h3 {
+        font-size: 1.15rem;
+        margin: 0 0 8px;
+    }
+
+    .ai-picker-result .ai-picker-task {
+        color: #444;
+        font-size: 15px;
+        margin-bottom: 16px;
+    }
+
+    .ai-picker-tool-list {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 16px;
+    }
+
+    .ai-picker-tool-list li {
+        margin-bottom: 12px;
+        padding: 12px 14px;
+        border: 1px solid #dee2e6;
+        border-radius: 6px;
+        background: #fafbfc;
+    }
+
+    .ai-picker-tool-list a {
+        font-weight: 600;
+    }
+
+    .ai-picker-tool-note {
+        display: block;
+        font-size: 13px;
+        color: #555;
+        margin-top: 4px;
+    }
+
+    .ai-picker-caveat {
+        font-size: 14px;
+        border-left: 3px solid dimgray;
+        padding: 10px 12px;
+        background: #f6f7f8;
+        margin: 0;
+    }
+
+    .ai-picker-footer {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px 20px 8px;
+        border-top: 1px solid #e8eaed;
+    }
+
+    .ai-picker-privacy {
+        font-size: 12px;
+        color: #666;
+        text-align: center;
+        margin: 0;
+        padding: 8px 16px 16px;
+    }
+</style>
+
+<script>
+(function () {
+    const T = function (name, url, note) { return { name: name, url: url, note: note || '' }; };
+
+    const nodes = {
+        start: {
+            kind: 'q',
+            text: 'What brings you here today?',
+            options: [
+                { label: 'Teaching or classroom prep', next: 'teach' },
+                { label: 'Research', next: 'research' },
+                { label: 'Clinical learning or training', next: 'clinical' },
+                { label: 'Email, meetings, team work', next: 'productivity' },
+                { label: 'New to AI — pick a starting point', next: 'foundations' },
+                { label: 'Need privacy or lowest cost', next: 'privacy_cost' }
+            ]
+        },
+        teach: {
+            kind: 'q',
+            text: 'What teaching task?',
+            options: [
+                { label: 'Lecture slides & speaker notes', next: 'r_slides' },
+                { label: 'Infographics & figures', next: 'r_infographic' },
+                { label: 'Short video or animation', next: 'r_video' },
+                { label: 'Podcast or audio lesson', next: 'r_podcast' },
+                { label: 'Case vignettes or PBL', next: 'r_cases' },
+                { label: 'OSCE stations', next: 'r_osce' },
+                { label: 'MCQs & quizzes', next: 'r_mcq' },
+                { label: 'Syllabus & learning objectives', next: 'r_syllabus' },
+                { label: 'Bangla ↔ English materials', next: 'r_bangla' }
+            ]
+        },
+        research: {
+            kind: 'q',
+            text: 'What research step?',
+            options: [
+                { label: 'Find & map literature', next: 'research_lit' },
+                { label: 'Systematic review screening', next: 'r_screening' },
+                { label: 'Hypothesis & study design', next: 'r_hypothesis' },
+                { label: 'Protocol or ethics application', next: 'r_protocol' },
+                { label: 'Reporting guidelines (CONSORT, PRISMA…)', next: 'r_reporting' },
+                { label: 'Stats, R, or Python help', next: 'r_stats' },
+                { label: 'Manuscript & language editing', next: 'r_manuscript' },
+                { label: 'Citations & reference manager', next: 'r_citations' },
+                { label: 'Grant or abstract', next: 'r_grant' },
+                { label: 'Preprint or journal submission', next: 'r_preprint' }
+            ]
+        },
+        research_lit: {
+            kind: 'q',
+            text: 'How do you want to search?',
+            options: [
+                { label: 'Classic databases (PubMed, Scholar)', next: 'r_lit_classic' },
+                { label: 'AI paper finders (Elicit, Consensus…)', next: 'r_lit_ai' },
+                { label: 'Citation maps & related papers', next: 'r_lit_maps' },
+                { label: 'Quick web answer with links', next: 'r_web_grounded' }
+            ]
+        },
+        clinical: {
+            kind: 'q',
+            text: 'What clinical or training goal?',
+            options: [
+                { label: 'Documentation practice (de-identified)', next: 'r_clin_doc' },
+                { label: 'Differential diagnosis — learning only', next: 'r_ddx' },
+                { label: 'Patient education handouts', next: 'r_patient_ed' },
+                { label: 'Drug interactions & dosing checks', next: 'r_drugs' },
+                { label: 'Guidelines & evidence', next: 'r_guidelines' },
+                { label: 'Exam / board study', next: 'r_exam' },
+                { label: 'Journal club or rounds on a paper', next: 'r_journal_club' },
+                { label: 'Logbook reflection', next: 'r_logbook' }
+            ]
+        },
+        productivity: {
+            kind: 'q',
+            text: 'Which workflow?',
+            options: [
+                { label: 'Emails & admin letters', next: 'r_email' },
+                { label: 'Meeting notes & actions', next: 'r_meetings' },
+                { label: 'Shared knowledge from PDFs/SOPs', next: 'r_team_kb' },
+                { label: 'Feedback on slides or handouts', next: 'r_slide_feedback' }
+            ]
+        },
+        foundations: {
+            kind: 'q',
+            text: 'What do you need first?',
+            options: [
+                { label: 'Draft, explain, or quiz stems', next: 'r_general_draft' },
+                { label: 'Answers with web links to check', next: 'r_web_grounded' },
+                { label: 'Chat grounded in my own files', next: 'r_own_files' },
+                { label: 'Find real papers before I read them', next: 'r_lit_ai' },
+                { label: 'Better prompts (stay on this page)', next: 'r_prompts' }
+            ]
+        },
+        privacy_cost: {
+            kind: 'q',
+            text: 'What matters most?',
+            options: [
+                { label: 'Free tier in the browser', next: 'r_free_tier' },
+                { label: 'Keep data on my machine', next: 'r_local' },
+                { label: 'Sensitive text — minimize cloud upload', next: 'r_sensitive' }
+            ]
+        },
+
+        r_slides: {
+            kind: 'result',
+            title: 'Lecture slides & timing',
+            task: 'Outline → slide titles, objectives, speaker notes; or auto-build a deck you then fact-check.',
+            tools: [
+                T('ChatGPT', 'https://chatgpt.com/', 'Outline & notes'),
+                T('Claude', 'https://claude.ai/', 'Long outlines'),
+                T('Gemini', 'https://gemini.google.com/', 'Free tier; pairs with Google Slides'),
+                T('Gamma', 'https://gamma.app/', 'Fast AI slide decks'),
+                T('Beautiful.ai', 'https://www.beautiful.ai/', 'Polished layouts'),
+                T('PowerPoint Copilot', 'https://www.microsoft.com/en-us/microsoft-365/powerpoint', 'If you use Microsoft 365'),
+                T('Google Slides', 'https://workspace.google.com/products/slides/', 'With Gemini in Workspace')
+            ],
+            caveat: 'Verify local epidemiology, drug names, and your exam blueprint. Keep a “facts to verify” slide.'
+        },
+        r_infographic: {
+            kind: 'result',
+            title: 'Infographics & visual explainers',
+            task: 'Brief the figure (audience, boxes, labels), then generate or lay out visuals.',
+            tools: [
+                T('Canva Magic Studio', 'https://www.canva.com/magic-studio/', 'Posters & patient-facing'),
+                T('BioRender', 'https://www.biorender.com/', 'Scientific figures'),
+                T('Napkin.ai', 'https://napkin.ai/', 'Diagrams from text'),
+                T('Figma', 'https://www.figma.com/', 'AI-assisted design'),
+                T('Gemini', 'https://gemini.google.com/', 'Image generation — check anatomy')
+            ],
+            caveat: 'Generated anatomy and drugs are often wrong. Label as illustrative until a clinician checks.'
+        },
+        r_video: {
+            kind: 'result',
+            title: 'Short teaching videos',
+            task: 'Script with a chat model; edit video and voice separately.',
+            tools: [
+                T('ChatGPT / Claude / Gemini', 'https://chatgpt.com/', 'Script & storyboard'),
+                T('Descript', 'https://www.descript.com/', 'Edit & captions'),
+                T('CapCut', 'https://www.capcut.com/', 'Free mobile/desktop edits'),
+                T('Clipchamp', 'https://clipchamp.com/', 'Browser editor'),
+                T('ElevenLabs', 'https://elevenlabs.io/', 'Voiceover'),
+                T('Synthesia', 'https://www.synthesia.io/', 'Avatar — costly; often skip for clinical teaching')
+            ],
+            caveat: 'A phone recording of you plus captions often beats an impersonal avatar for students.'
+        },
+        r_podcast: {
+            kind: 'result',
+            title: 'Podcasts & audio lessons',
+            task: 'Audio overview of your sources or a scripted recap.',
+            tools: [
+                T('NotebookLM', 'https://notebooklm.google.com/', 'Audio Overview from uploads'),
+                T('ElevenLabs', 'https://elevenlabs.io/', 'Synthetic voice'),
+                T('Descript', 'https://www.descript.com/', 'Record & polish'),
+                T('Adobe Podcast', 'https://podcast.adobe.com/', 'Speech enhancement')
+            ],
+            caveat: 'Listen once as faculty before assigning — tone and factual slips are easy to miss.'
+        },
+        r_cases: {
+            kind: 'result',
+            title: 'Case vignettes & PBL',
+            task: 'Branching cases with labs, red herrings, and debrief — specify setting (district vs tertiary).',
+            tools: [
+                T('ChatGPT', 'https://chatgpt.com/'),
+                T('Claude', 'https://claude.ai/'),
+                T('Gemini', 'https://gemini.google.com/'),
+                T('NotebookLM', 'https://notebooklm.google.com/', 'Ground in a guideline PDF you upload')
+            ],
+            caveat: 'Labs must be internally consistent. Name year of study and local disease mix.'
+        },
+        r_osce: {
+            kind: 'result',
+            title: 'OSCE stations',
+            task: 'Station instructions, SP scripts, checklists, feedback phrases.',
+            tools: [
+                T('ChatGPT', 'https://chatgpt.com/'),
+                T('Claude', 'https://claude.ai/'),
+                T('Gemini', 'https://gemini.google.com/')
+            ],
+            caveat: 'Pilot with two faculty scorers before any real exam.'
+        },
+        r_mcq: {
+            kind: 'result',
+            title: 'MCQs & item writing',
+            task: 'One-best-answer items, distractors, rationales — then human item review.',
+            tools: [
+                T('ChatGPT', 'https://chatgpt.com/'),
+                T('Claude', 'https://claude.ai/'),
+                T('Gemini', 'https://gemini.google.com/'),
+                T('Quizlet', 'https://quizlet.com/', 'Student practice sets')
+            ],
+            caveat: 'Watch for two correct answers, cueing, and outdated drugs.'
+        },
+        r_syllabus: {
+            kind: 'result',
+            title: 'Syllabus & outcomes mapping',
+            task: 'Map lectures to BMDC/institutional outcomes and Bloom levels.',
+            tools: [
+                T('ChatGPT', 'https://chatgpt.com/'),
+                T('Claude', 'https://claude.ai/'),
+                T('NotebookLM', 'https://notebooklm.google.com/', 'Upload your curriculum PDF')
+            ],
+            caveat: 'Paste your college’s real outcomes — generic US-style maps will not match MBBS in Bangladesh.'
+        },
+        r_bangla: {
+            kind: 'result',
+            title: 'Bangla ↔ English teaching materials',
+            task: 'Translate or simplify handouts and glossaries.',
+            tools: [
+                T('Gemini', 'https://gemini.google.com/', 'Strong for mixed-language workflows'),
+                T('ChatGPT', 'https://chatgpt.com/'),
+                T('Google Translate', 'https://translate.google.com/'),
+                T('DeepL', 'https://www.deepl.com/translator', 'English-centric')
+            ],
+            caveat: 'Have a bilingual colleague review drug names, anatomy, and patient-facing Bangla.'
+        },
+        r_lit_classic: {
+            kind: 'result',
+            title: 'Database literature search',
+            task: 'Proper search strings, MeSH, and logs — AI only helps you plan the search.',
+            tools: [
+                T('PubMed', 'https://pubmed.ncbi.nlm.nih.gov/'),
+                T('PMC', 'https://www.ncbi.nlm.nih.gov/pmc/'),
+                T('Google Scholar', 'https://scholar.google.com/'),
+                T('Semantic Scholar', 'https://www.semanticscholar.org/')
+            ],
+            caveat: 'Keep a search log (database, date, string). Read the papers you cite.'
+        },
+        r_lit_ai: {
+            kind: 'result',
+            title: 'Paper-first AI literature tools',
+            task: 'Related papers, methods extraction, evidence summaries — then open the PDFs.',
+            tools: [
+                T('Elicit', 'https://elicit.com/'),
+                T('Consensus', 'https://consensus.app/'),
+                T('Scite', 'https://scite.ai/', 'Smart citations'),
+                T('Semantic Scholar', 'https://www.semanticscholar.org/'),
+                T('PubMed', 'https://pubmed.ncbi.nlm.nih.gov/')
+            ],
+            caveat: 'Does not replace a systematic search protocol for formal reviews.'
+        },
+        r_lit_maps: {
+            kind: 'result',
+            title: 'Citation maps & literature graphs',
+            task: 'See how papers connect before deep reading.',
+            tools: [
+                T('Connected Papers', 'https://www.connectedpapers.com/'),
+                T('ResearchRabbit', 'https://www.researchrabbit.ai/'),
+                T('Semantic Scholar', 'https://www.semanticscholar.org/')
+            ],
+            caveat: 'Maps can miss recent preprints — cross-check PubMed.'
+        },
+        r_screening: {
+            kind: 'result',
+            title: 'Systematic review screening',
+            task: 'Title/abstract screening after inclusion criteria — document AI use in PRISMA.',
+            tools: [
+                T('Rayyan', 'https://www.rayyan.ai/', 'Free tier for teams'),
+                T('Covidence', 'https://www.covidence.org/', 'Often institutional/paid'),
+                T('ASReview', 'https://asreview.nl/', 'Active learning screening')
+            ],
+            caveat: 'High-stakes reviews still need dual human screening where your protocol requires it.'
+        },
+        r_hypothesis: {
+            kind: 'result',
+            title: 'Hypothesis & study design',
+            task: 'Brainstorm mechanisms, confounders, and falsification questions.',
+            tools: [
+                T('ChatGPT', 'https://chatgpt.com/'),
+                T('Claude', 'https://claude.ai/'),
+                T('Gemini', 'https://gemini.google.com/'),
+                T('Elicit', 'https://elicit.com/', 'Find related empirical work')
+            ],
+            caveat: 'Feasibility, sample size, and ethics need local human experts next.'
+        },
+        r_protocol: {
+            kind: 'result',
+            title: 'Protocol & ethics drafting',
+            task: 'Structure from your notes; match SPIRIT/EQUATOR — IRB forms win.',
+            tools: [
+                T('Claude', 'https://claude.ai/', 'Long structured drafts'),
+                T('ChatGPT', 'https://chatgpt.com/'),
+                T('Gemini', 'https://gemini.google.com/'),
+                T('SPIRIT', 'https://www.spirit-statement.org/', 'Checklist outline'),
+                T('EQUATOR Network', 'https://www.equator-network.org/', 'Reporting & protocol resources')
+            ],
+            caveat: 'Never paste identifiable records. Supervisor + IRB secretary must review.'
+        },
+        r_reporting: {
+            kind: 'result',
+            title: 'Reporting-guideline mapping',
+            task: 'Map draft to CONSORT, STROBE, PRISMA, CARE, COREQ item-by-item.',
+            tools: [
+                T('Claude', 'https://claude.ai/', 'Paste official checklist + draft'),
+                T('ChatGPT', 'https://chatgpt.com/'),
+                T('EQUATOR Network', 'https://www.equator-network.org/', 'Official checklists')
+            ],
+            caveat: 'Models mix guideline versions — download the current PDF from EQUATOR.'
+        },
+        r_stats: {
+            kind: 'result',
+            title: 'Data analysis support',
+            task: 'Explain tests, draft R/Python, comment scripts — on de-identified data only.',
+            tools: [
+                T('ChatGPT', 'https://chatgpt.com/', 'Advanced Data Analysis on paid plan'),
+                T('Claude', 'https://claude.ai/'),
+                T('Google Colab', 'https://colab.google/'),
+                T('RStudio', 'https://posit.co/download/rstudio-desktop/'),
+                T('Jupyter', 'https://jupyter.org/')
+            ],
+            caveat: 'Do not upload full EMR extracts to public tools. Statistician reviews inference.'
+        },
+        r_manuscript: {
+            kind: 'result',
+            title: 'Manuscript drafting & editing',
+            task: 'IMRaD scaffolding, Methods tightening, cover letters, reviewer responses.',
+            tools: [
+                T('Claude', 'https://claude.ai/', 'Long documents'),
+                T('ChatGPT', 'https://chatgpt.com/'),
+                T('Gemini', 'https://gemini.google.com/'),
+                T('Paperpal', 'https://www.paperpal.com/'),
+                T('Grammarly', 'https://www.grammarly.com/')
+            ],
+            caveat: 'Invented references are common. Disclose AI use per journal policy.'
+        },
+        r_citations: {
+            kind: 'result',
+            title: 'Citation management',
+            task: 'Import from PubMed/DOI — do not ask chatbots to invent references.',
+            tools: [
+                T('Zotero', 'https://www.zotero.org/', 'Free, strong for students'),
+                T('Mendeley', 'https://www.mendeley.com/'),
+                T('EndNote', 'https://endnote.com/', 'Institutional'),
+                T('DOI.org', 'https://www.doi.org/'),
+                T('Scite', 'https://scite.ai/', 'Citation context')
+            ],
+            caveat: 'Clean metadata in Zotero; use chat only for BibTeX style tweaks after you have the paper.'
+        },
+        r_grant: {
+            kind: 'result',
+            title: 'Grants & specific aims',
+            task: 'Compress protocol into aims, significance, one-page concept.',
+            tools: [
+                T('Claude', 'https://claude.ai/'),
+                T('ChatGPT', 'https://chatgpt.com/'),
+                T('Gemini', 'https://gemini.google.com/')
+            ],
+            caveat: 'Keep numbers and feasibility claims you can defend locally.'
+        },
+        r_preprint: {
+            kind: 'result',
+            title: 'Preprint & submission workflow',
+            task: 'Cover letter, checklist, pick venue — read journal site today.',
+            tools: [
+                T('medRxiv', 'https://www.medrxiv.org/'),
+                T('Research Square', 'https://www.researchsquare.com/'),
+                T('SSRN', 'https://www.ssrn.com/'),
+                T('ChatGPT / Claude', 'https://chatgpt.com/', 'Draft cover letter you edit')
+            ],
+            caveat: 'Co-author approval before any preprint. AI does not know current journal policy from memory.'
+        },
+        r_clin_doc: {
+            kind: 'result',
+            title: 'Clinical documentation (learning)',
+            task: 'H&P, progress note, discharge structure from de-identified teaching cases.',
+            tools: [
+                T('ChatGPT', 'https://chatgpt.com/'),
+                T('Claude', 'https://claude.ai/'),
+                T('Gemini', 'https://gemini.google.com/'),
+                T('Microsoft Copilot', 'https://copilot.microsoft.com/')
+            ],
+            caveat: 'Strip all identifiers. Never paste from the live EMR into a public chat.'
+        },
+        r_ddx: {
+            kind: 'result',
+            title: 'Differential diagnosis (education only)',
+            task: 'Ranked differential, discriminating tests — compare with textbook/supervisor.',
+            tools: [
+                T('ChatGPT', 'https://chatgpt.com/'),
+                T('Claude', 'https://claude.ai/'),
+                T('Gemini', 'https://gemini.google.com/'),
+                T('OpenEvidence', 'https://www.openevidence.com/', 'Verify every claim independently')
+            ],
+            caveat: 'Not for real patient care. Models miss rare diagnoses and local patterns (dengue, TB, typhoid).'
+        },
+        r_patient_ed: {
+            kind: 'result',
+            title: 'Patient-facing education',
+            task: 'Plain-language handouts, teach-back questions, pictograms.',
+            tools: [
+                T('ChatGPT', 'https://chatgpt.com/'),
+                T('Claude', 'https://claude.ai/'),
+                T('Canva', 'https://www.canva.com/magic-studio/', 'Layout'),
+                T('CDC health literacy', 'https://www.cdc.gov/healthliteracy/', 'Principles')
+            ],
+            caveat: 'Review Bangla carefully. Match what your clinic actually offers.'
+        },
+        r_drugs: {
+            kind: 'result',
+            title: 'Drug information',
+            task: 'Use AI only to phrase the question — confirm in verified databases.',
+            tools: [
+                T('Drugs.com interactions', 'https://www.drugs.com/drug_interactions.html'),
+                T('DrugBank', 'https://go.drugbank.com/'),
+                T('WHO ATC/DDD', 'https://www.whocc.no/atc_ddd_index/'),
+                T('Institutional formulary / UpToDate', '', 'If your hospital licenses it')
+            ],
+            caveat: 'No chatbot dosing — especially paeds, pregnancy, renal impairment.'
+        },
+        r_guidelines: {
+            kind: 'result',
+            title: 'Guidelines & evidence',
+            task: 'Find the guideline, then read it — national/hospital protocols override summaries.',
+            tools: [
+                T('PubMed', 'https://pubmed.ncbi.nlm.nih.gov/'),
+                T('WHO', 'https://www.who.int/'),
+                T('NICE', 'https://www.nice.org.uk/guidance'),
+                T('OpenEvidence', 'https://www.openevidence.com/', 'Summaries — open sources'),
+                T('Perplexity', 'https://www.perplexity.ai/', 'Orientation with links')
+            ],
+            caveat: 'US-centric summaries may not fit Bangladesh practice.'
+        },
+        r_exam: {
+            kind: 'result',
+            title: 'Exam & board study',
+            task: 'Flashcards, spaced repetition, “explain like I failed yesterday”.',
+            tools: [
+                T('Anki', 'https://apps.ankiweb.net/'),
+                T('Quizlet', 'https://quizlet.com/'),
+                T('ChatGPT', 'https://chatgpt.com/', 'Explanations you verify'),
+                T('Claude', 'https://claude.ai/'),
+                T('Gemini', 'https://gemini.google.com/')
+            ],
+            caveat: 'Generated cards encode errors — tag only cards you have verified.'
+        },
+        r_journal_club: {
+            kind: 'result',
+            title: 'Journal club & rounds',
+            task: 'PICO, strengths/limitations, discussion questions from the PDF you read.',
+            tools: [
+                T('NotebookLM', 'https://notebooklm.google.com/', 'Upload the paper PDF'),
+                T('Claude', 'https://claude.ai/'),
+                T('ChatGPT', 'https://chatgpt.com/'),
+                T('Perplexity', 'https://www.perplexity.ai/', 'Background context with links')
+            ],
+            caveat: 'Ask for page-level quotes, then check them in the PDF yourself.'
+        },
+        r_logbook: {
+            kind: 'result',
+            title: 'Logbook reflections',
+            task: 'Structure honest reflection without inventing clinical facts.',
+            tools: [
+                T('ChatGPT', 'https://chatgpt.com/'),
+                T('Claude', 'https://claude.ai/'),
+                T('Gemini', 'https://gemini.google.com/')
+            ],
+            caveat: 'Supervisors spot generic AI prose — organise your real experience, do not fabricate.'
+        },
+        r_email: {
+            kind: 'result',
+            title: 'Email & admin writing',
+            task: 'Tone, brevity, polite follow-ups.',
+            tools: [
+                T('ChatGPT', 'https://chatgpt.com/'),
+                T('Claude', 'https://claude.ai/'),
+                T('Gemini', 'https://gemini.google.com/'),
+                T('Microsoft Copilot', 'https://copilot.microsoft.com/', 'In Outlook/Word if licensed')
+            ],
+            caveat: 'Remove student or patient identifiers from pasted examples.'
+        },
+        r_meetings: {
+            kind: 'result',
+            title: 'Meeting notes',
+            task: 'Transcript → decisions, owners, deadlines.',
+            tools: [
+                T('Descript', 'https://www.descript.com/'),
+                T('Otter', 'https://otter.ai/'),
+                T('Gemini', 'https://gemini.google.com/', 'On a transcript you control'),
+                T('ChatGPT', 'https://chatgpt.com/')
+            ],
+            caveat: 'Recording needs consent; hospital policy may forbid cloud transcription of clinical talks.'
+        },
+        r_team_kb: {
+            kind: 'result',
+            title: 'Team knowledge base',
+            task: 'Shared notebook of SOPs, lectures, papers the model must stay within.',
+            tools: [
+                T('NotebookLM', 'https://notebooklm.google.com/'),
+                T('Claude', 'https://claude.ai/', 'Projects'),
+                T('ChatGPT', 'https://chatgpt.com/', 'Projects / custom GPTs')
+            ],
+            caveat: 'Outdated guidelines in the notebook → confident wrong doses. Control who can upload.'
+        },
+        r_slide_feedback: {
+            kind: 'result',
+            title: 'Slide & handout feedback',
+            task: 'Clarity, objectives, accessibility, timing — upload PDF export when possible.',
+            tools: [
+                T('Claude', 'https://claude.ai/'),
+                T('ChatGPT', 'https://chatgpt.com/'),
+                T('Gemini', 'https://gemini.google.com/')
+            ],
+            caveat: 'You still own pedagogy and factual accuracy after feedback.'
+        },
+        r_general_draft: {
+            kind: 'result',
+            title: 'General drafting & explanation',
+            task: 'Outlines, first drafts, simplify concepts, quiz stems you edit.',
+            tools: [
+                T('ChatGPT', 'https://chatgpt.com/'),
+                T('Claude', 'https://claude.ai/'),
+                T('Gemini', 'https://gemini.google.com/'),
+                T('Microsoft Copilot', 'https://copilot.microsoft.com/'),
+                T('Grok', 'https://grok.com/')
+            ],
+            caveat: 'Free tiers rate-limit. Always verify clinical facts.'
+        },
+        r_web_grounded: {
+            kind: 'result',
+            title: 'Web-grounded answers',
+            task: 'Quick topic orientation with links you open yourself.',
+            tools: [
+                T('Perplexity', 'https://www.perplexity.ai/'),
+                T('Gemini', 'https://gemini.google.com/', 'With Google Search'),
+                T('ChatGPT', 'https://chatgpt.com/', 'With browsing where available')
+            ],
+            caveat: 'Citations can be wrong — open the source; do not cite the chatbot in papers.'
+        },
+        r_own_files: {
+            kind: 'result',
+            title: 'Your PDFs & notes',
+            task: 'Summaries and Q&A grounded in files you are allowed to upload.',
+            tools: [
+                T('NotebookLM', 'https://notebooklm.google.com/', 'Strong audio overviews'),
+                T('Claude', 'https://claude.ai/', 'Projects / files'),
+                T('ChatGPT', 'https://chatgpt.com/', 'Files / custom GPTs')
+            ],
+            caveat: 'Upload only materials you may share. No patient-identifiable uploads.'
+        },
+        r_prompts: {
+            kind: 'result',
+            title: 'Prompt patterns (on this page)',
+            task: 'Role, audience, task, constraints, cite-or-say-cannot, state uncertainty. See Foundations section.',
+            tools: [
+                T('ChatGPT', 'https://chatgpt.com/', 'Practice prompts here'),
+                T('Claude', 'https://claude.ai/'),
+                T('Gemini', 'https://gemini.google.com/', 'Free on campus Wi‑Fi')
+            ],
+            caveat: 'Scroll to “Foundations” on this page for a full medical prompt example.'
+        },
+        r_free_tier: {
+            kind: 'result',
+            title: 'Free tiers to start',
+            task: 'Browser tools for learning without paid plans.',
+            tools: [
+                T('Gemini', 'https://gemini.google.com/'),
+                T('NotebookLM', 'https://notebooklm.google.com/'),
+                T('ChatGPT', 'https://chatgpt.com/'),
+                T('Claude', 'https://claude.ai/'),
+                T('Perplexity', 'https://www.perplexity.ai/'),
+                T('DeepSeek', 'https://chat.deepseek.com/', 'Lower-cost alternative')
+            ],
+            caveat: 'Paid plans help long documents and heavy analysis — not required to learn basics.'
+        },
+        r_local: {
+            kind: 'result',
+            title: 'Local & open models',
+            task: 'On-device or self-hosted when you have hardware and install help.',
+            tools: [
+                T('Ollama', 'https://ollama.com/', 'Run models locally'),
+                T('DeepSeek', 'https://chat.deepseek.com/'),
+                T('Mistral', 'https://mistral.ai/'),
+                T('Qwen', 'https://chat.qwen.ai/')
+            ],
+            caveat: 'Better privacy on-device; medical quality and safety still need human review.'
+        },
+        r_sensitive: {
+            kind: 'result',
+            title: 'Sensitive or de-identified work',
+            task: 'Minimize cloud: de-identify first; prefer local; never EMR screenshots.',
+            tools: [
+                T('Ollama', 'https://ollama.com/', 'Local when feasible'),
+                T('Claude', 'https://claude.ai/', 'Only de-identified vignettes'),
+                T('Zotero + PubMed', 'https://www.zotero.org/', 'Citations without chat inventing refs'),
+                T('RStudio / Jupyter', 'https://jupyter.org/', 'Analysis on your machine')
+            ],
+            caveat: 'Assume text on public cloud may be stored outside Bangladesh. Follow hospital/college policy.'
+        }
+    };
+
+    const openBtn = document.getElementById('ai-tool-picker-open');
+    const backdrop = document.getElementById('ai-tool-picker-backdrop');
+    const modal = document.getElementById('ai-tool-picker-modal');
+    const closeBtn = document.getElementById('ai-tool-picker-close');
+    const bodyEl = document.getElementById('ai-picker-body');
+    const backBtn = document.getElementById('ai-picker-back');
+    const restartBtn = document.getElementById('ai-picker-restart');
+    const progressBar = document.getElementById('ai-picker-progress-bar');
+    const subEl = document.getElementById('ai-picker-sub');
+
+    let stack = ['start'];
+    let lastFocus = null;
+
+    function escapeHtml(s) {
+        return String(s)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;');
+    }
+
+    function progressPct() {
+        const depth = stack.length;
+        if (depth <= 1) return 12;
+        const node = nodes[stack[stack.length - 1]];
+        if (node && node.kind === 'result') return 100;
+        return Math.min(88, 12 + depth * 18);
+    }
+
+    function renderQuestion(node) {
+        subEl.textContent = 'Tap an option to continue.';
+        let html = '<p class="ai-picker-question">' + escapeHtml(node.text) + '</p><div class="ai-picker-pills" role="group" aria-label="Options">';
+        node.options.forEach(function (opt, i) {
+            html += '<button type="button" class="ai-picker-pill" data-next="' + escapeHtml(opt.next) + '" data-index="' + i + '">' + escapeHtml(opt.label) + '</button>';
+        });
+        html += '</div>';
+        bodyEl.innerHTML = html;
+        bodyEl.querySelectorAll('.ai-picker-pill').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                const next = btn.getAttribute('data-next');
+                stack.push(next);
+                render();
+            });
+        });
+    }
+
+    function renderResult(node) {
+        subEl.textContent = 'Suggested tools from this resource page.';
+        let html = '<div class="ai-picker-result"><h3>' + escapeHtml(node.title) + '</h3>';
+        html += '<p class="ai-picker-task">' + escapeHtml(node.task) + '</p><ul class="ai-picker-tool-list">';
+        node.tools.forEach(function (tool) {
+            html += '<li>';
+            if (tool.url) {
+                html += '<a href="' + escapeHtml(tool.url) + '" target="_blank" rel="noopener" class="linkDecExt">' + escapeHtml(tool.name) + '</a>';
+            } else {
+                html += '<strong>' + escapeHtml(tool.name) + '</strong>';
+            }
+            if (tool.note) {
+                html += '<span class="ai-picker-tool-note">' + escapeHtml(tool.note) + '</span>';
+            }
+            html += '</li>';
+        });
+        html += '</ul><p class="ai-picker-caveat">' + escapeHtml(node.caveat) + '</p></div>';
+        bodyEl.innerHTML = html;
+    }
+
+    function render() {
+        const id = stack[stack.length - 1];
+        const node = nodes[id];
+        if (!node) {
+            stack = ['start'];
+            return render();
+        }
+        progressBar.style.width = progressPct() + '%';
+        backBtn.disabled = stack.length <= 1;
+        if (node.kind === 'result') {
+            renderResult(node);
+        } else {
+            renderQuestion(node);
+        }
+    }
+
+    function openModal() {
+        lastFocus = document.activeElement;
+        stack = ['start'];
+        render();
+        backdrop.hidden = false;
+        modal.hidden = false;
+        backdrop.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        closeBtn.focus();
+    }
+
+    function closeModal() {
+        backdrop.hidden = true;
+        modal.hidden = true;
+        backdrop.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+
+    openBtn.addEventListener('click', openModal);
+    closeBtn.addEventListener('click', closeModal);
+    backdrop.addEventListener('click', closeModal);
+    restartBtn.addEventListener('click', function () {
+        stack = ['start'];
+        render();
+    });
+    backBtn.addEventListener('click', function () {
+        if (stack.length > 1) {
+            stack.pop();
+            render();
+        }
+    });
+    document.addEventListener('keydown', function (e) {
+        if (modal.hidden) return;
+        if (e.key === 'Escape') closeModal();
+    });
+})();
+</script>
