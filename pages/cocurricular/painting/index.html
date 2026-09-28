@@ -58,9 +58,11 @@
     <div id="dependencies"></div>
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="/assets/css/gallery.css">
+    <link rel="stylesheet" href="/assets/css/rbgallery.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/assets/js/script.js" defer></script>
     <script src="/assets/js/gallery.js" defer></script>
+    <script src="/assets/js/rbgallery.js" defer></script>
     <style>
         .youtube-post-dark {
             background-color: #242526;
@@ -188,7 +190,7 @@
                     alt="FMCH Logo Recreated" class="img-fluid rb-lazy-image" />
             </a>
             <a href="#" class="col-lg-2 col-md-4 col-sm-6 mb-4 rb-gallery-item"
-                data-src="/assets/img/cocurricular/paintings/astrounicorn-logo-rajib-biswas.jpg"
+                data-src="/assets/img/cocurricular/paintings/astrounicorn-logo-rajib-biswas-logo.png"
                 data-title="AstroUnicorn Logo" data-description="A creative logo design for an online store called AstroUnicorn. My approach was to create a logo that is simple, 
                unique, and memorable. 
                This design combines celestial elements with mythical imagery, 
@@ -233,40 +235,57 @@
         </p>
         <h4 class="pt20">Quick sketches</h4>
         <hr>
-        <div id="art-gallery" class="row">
-            <a href="#" class="col-lg-3 col-md-4 col-sm-6 mb-4 rb-gallery-item"
-                data-src="/assets/img/cocurricular/paintings/25-10-2025_rajib_biswas.jpg"
-                data-title="Character Design Sketch"
-                data-description="A quick character design sketch created for an animation project." data-gallery="art">
-                <img data-src="/assets/img/cocurricular/paintings/25-10-2025_rajib_biswas_thumb.jpg"
-                    alt="It was a quick character design for an animation" class="img-fluid rb-lazy-image" />
-            </a>
-            <a href="#" class="col-lg-3 col-md-4 col-sm-6 mb-4 rb-gallery-item"
-                data-src="/assets/img/cocurricular/paintings/11-6-2015_rajib_biswas.png" data-title="Classroom Doodle"
-                data-description="A doodle I created during a classroom session." data-gallery="art" data-resources='<h6>Resources:</h6>
-               <ul>
-                   <li><a href="/assets/img/cocurricular/paintings/11-6-2015_rajib_biswas.pdf" class="linkDec">See the PDF of this illustration</a></li>
-               </ul>'>
-                <img data-src="/assets/img/cocurricular/paintings/11-6-2015_rajib_biswas_thumb.jpg"
-                    alt="Classroom doodle - June 11, 2015" class="img-fluid rb-lazy-image" />
-            </a>
-            <a href="#" class="col-lg-3 col-md-4 col-sm-6 mb-4 rb-gallery-item"
-                data-src="/assets/img/cocurricular/paintings/2018-09-07 - Rajib Biswas.jpeg"
-                data-title="Classroom Doodle" data-description="A doodle I created during a classroom session."
-                data-gallery="art" data-resources='<h6>Resources:</h6>
-               <ul>
-                   <li><a href="/assets/img/cocurricular/paintings/2018-09-07 - Rajib Biswas.pdf" class="linkDec">See the PDF of this illustration</a></li>
-               </ul>'>
-                <img data-src="/assets/img/cocurricular/paintings/2018-09-07 - Rajib Biswas.jpeg"
-                    alt="Quick sketch - September 7, 2018" class="img-fluid rb-lazy-image" />
-            </a>
-            <a href="#" class="col-lg-3 col-md-4 col-sm-6 mb-4 rb-gallery-item"
-                data-src="/assets/img/cocurricular/paintings/2014-09-08 - Rajib Biswas.jpg"
-                data-title="Classroom Doodle" data-description="Another classroom doodle I sketeched back in 2014."
-                data-gallery="art">
-                <img data-src="/assets/img/cocurricular/paintings/2014-09-08 - Rajib Biswas-thumb.jpg"
-                    alt="Quick sketch - September 7, 2018" class="img-fluid rb-lazy-image" />
-            </a>
+        <div id="gallery1" class="row">
+            <div class="col-lg-3 col-sm-12">
+                <img src="/assets/img/cocurricular/paintings/25-10-2025_rajib_biswas.jpg"
+                    data-thumb="/assets/img/cocurricular/paintings/25-10-2025_rajib_biswas_thumb.jpg"
+                    data-view="fi"
+                    data-title="Character Design Sketch"
+                    data-description="A quick character design sketch created for an animation project."
+                    data-date="2015-10-25">
+            </div>
+            <div class="col-lg-3 col-sm-12">
+                <img src="/assets/img/cocurricular/paintings/11-6-2015_rajib_biswas.png"
+                    data-thumb="/assets/img/cocurricular/paintings/11-6-2015_rajib_biswas_thumb.jpg"
+                    data-view="fi"
+                    data-title="Classroom doodle"
+                    data-date="2015-06-11">
+            </div>
+            <div class="col-lg-3 col-sm-12">
+                <img src="/assets/img/cocurricular/paintings/2018-09-07 - Rajib Biswas.jpeg"
+                    data-thumb="/assets/img/cocurricular/paintings/2018-09-07 - Rajib Biswas.jpeg"
+                    data-view="fi"
+                    data-title="Quick sketch"
+                    data-date="2018-09-07">
+            </div>
+            <div class="col-lg-3 col-sm-12">
+                <img src="/assets/img/cocurricular/paintings/2014-09-08 - Rajib Biswas.jpg"
+                    data-thumb="/assets/img/cocurricular/paintings/2014-09-08 - Rajib Biswas-thumb.jpg"
+                    data-view="fi"
+                    data-title="Classroom Doodle"
+                    data-date="2014-09-08">
+            </div>
+            <div class="col-lg-3 col-sm-12">
+                <img src="/assets/img/cocurricular/paintings/2018-09-10-rajibbiswas.jpg"
+                    data-thumb="/assets/img/cocurricular/paintings/2018-09-10-rajibbiswas-thumb.jpg"
+                    data-view="fi"
+                    data-title="Night rain"
+                    data-date="2018-09-10">
+            </div>
+            <div class="col-lg-3 col-sm-12">
+                <img src="/assets/img/cocurricular/paintings/2018-09-08_rajibbiswas.jpg"
+                    data-thumb="/assets/img/cocurricular/paintings/2018-09-08_rajibbiswas_thumb.jpg"
+                    data-view="fi"
+                    data-title="Yellow"
+                    data-date="2018-09-08">
+            </div>
+            <div class="col-lg-3 col-sm-12">
+                <img src="/assets/img/cocurricular/paintings/2028-09-09-rajibbiswas.jpg"
+                    data-thumb="/assets/img/cocurricular/paintings/2028-09-09-rajibbiswas-thumb.jpg"
+                    data-view="fi"
+                    data-title="Fly away"
+                    data-date="2018-09-09">
+            </div>
         </div>
         <h4 class="pt20">Other random graphics</h4>
         <hr>
